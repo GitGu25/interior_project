@@ -1,27 +1,119 @@
+/* 기본 스타일 */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
 }
 
-header {
-    background-color: #333;
-    color: white;
-    padding: 1rem;
-    text-align: center;
+/* 헤더 스타일 */
+	.header {
+	    background-color: #FFF; /* 다크 그레이 배경 */
+	    color: white;
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	    padding: 15px 60px;
+	}
+	
+	/* 헤더 제목 */
+	.header h1 {
+		color: #2C3673;
+	    margin: 0;
+	    font-size: 24px;
+	}
+	
+	/* 네비게이션 메뉴 */
+	.navbar_menu {
+	    list-style: none;
+	    padding: 0;
+	    margin: 0;
+	    display: flex;  /* 가로 정렬 */
+	}
+	
+	/* 네비게이션 아이템 */
+	.navbar_menu li {
+	    margin-left: 20px;
+	}
+	
+	/* 네비게이션 링크 */
+	.navbar_menu li a {
+	    color: #777777;
+	    text-decoration: none;
+	    font-size: 18px;
+	    padding: 10px 15px;
+	    transition: 0.3s; /* 부드러운 효과 */
+	}
+	
+	/* 호버 효과 */
+	.navbar_menu li a:hover {
+	    background-color: #EEE;
+	    border-radius: 10px;
+	}
+	
+	/* 클릭(액티브) 효과 */
+	.navbar_menu li a:active {
+	    background-color: #DDD; /* 클릭 시 배경색 */
+	    border-radius: 10px;
+	}
+
+hr {
+    border: 1px solid #EEE;  /* hr의 색상을 #EEE로 설정 */
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 15px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-}
+/* 푸터 스타일 */
+	.footer {
+	    background-color: #3E3E3E; /* 배경색 */
+	    color: white;
+	    display: flex;
+	    justify-content: space-between;  /* 푸터를 중앙으로 정렬 */
+	    padding: 80px 80px 40px;  /* 푸터 안의 여백 */
+	    width: 100%;
+	}
+	
+	.footer-left, .footer-right {
+	    width: 45%;  /* 왼쪽과 오른쪽 영역의 너비를 각각 45%로 설정 */
+	    display: flex;
+	    flex-direction: column;  /* 세로로 나열되도록 설정 */
+	    align-items: flex-start;  /* 항목들을 왼쪽 정렬 */
+	}
+	
+	.footer-left p, .footer-right p, .font-left h2 {
+	    margin: 2px 0;  /* 각 항목 간의 간격을 설정 */
+	}
+	
+	.footer-left p {
+	    line-height: 0.1;  /* 텍스트 간격을 약간 띄우기 */
+	}
+	
+	.footer-right p {
+	    line-height: 1;  /* 텍스트 간격을 약간 띄우기 */
+		font-weight: lighter;
+	}
+	
+	/* 전화문의와 전화번호의 line-height 줄이기 */
+	.footer-left h2 {
+	    line-height: 0.4; /* '전화번호'와 '전화문의' 간격을 줄임 */
+	}
+	
+	/*이미지 변환
+	invert(100%) : 색반전
+	hue-rotate(180deg): 색상을 좀 더 조정
+	transform: scale(0.8) scaleX(-1): 크기 80% 및 좌우 반전 */
+	.footer-left img {
+	    filter: invert(100%) hue-rotate(180deg);
+	    transform: scale(0.8) scaleX(-1);
+	    vertical-align: text-bottom;
+	}
+	
+	
+	/* 반응형 디자인 */
+	@media (max-width: 768px) {
+	    .footer {
+	        flex-direction: column; /* 세로로 정렬 */
+	        padding: 20px 40px;  /* 여백을 좁혀서 공간 활용 */
+	    }
+	
+	    .footer-left, .footer-right {
+	        width: 100%;  /* 한 줄로 전체 너비 차지 */
+	    }
+	}
