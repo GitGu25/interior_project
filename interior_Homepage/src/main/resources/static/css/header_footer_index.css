@@ -30,6 +30,7 @@ body {
 		color: #2C3673;
 	    margin: 0;
 	    font-size: 24px;
+	    font-weight: bold;
 	}
 	
 	/* 네비게이션 메뉴 */
@@ -172,3 +173,5 @@ hr {
 	    background-color: #fff;
 		padding-top: 48px; /* 위쪽 간격을 48px로 설정 */
 	}
+	
+	
