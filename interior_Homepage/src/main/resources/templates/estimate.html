@@ -46,19 +46,20 @@
                <th scope="col">작성자</th>
             </tr>
          </thead>
-         <!--<tbody>
+         <tbody>
             <tr th:if="${#lists.size(list) > 0}" th:each="list : ${list}">
-            <td th:text="${list.bNum}"></td>
-            <td class="title">
-               <a href="#" th:text="${list.bSubject}"></a>
-            </td>
-            <td th:text="${list.bHit}"></td>
-            <td th:text="${list.bRegistDay != null ? #temporals.format(list.bRegistDay, 'yyyy-MM-dd HH:mm:ss') : '-'}"></td>
+	            <td th:text="${list.interiorEstimateId}"></td>
+	            <td class="title">
+	               <a href="#" th:text="${list.interiorEstimateTitle}"></a>
+	            </td>
+	            <td th:text="${list.interiorEstimateCreatedAt != null ? #temporals.format(list.bRegistDay, 'yyyy-MM-dd HH:mm:ss') : '-'}"></td>
+	            <td th:text="${list.interiorEstimateStatus}"></td>
+	            <td th:text="${list.interiorEstimateName}"></td>
             </tr>
             <tr th:unless="${#lists.size(list) > 0}">
                <td colspan="5">조회된 결과가 없습니다.</td>
             </tr>
-         </tbody>-->
+         </tbody>
       </table>
    </div>
    <div th:replace="layout/footer"></div>

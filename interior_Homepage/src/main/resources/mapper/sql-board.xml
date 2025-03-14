@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="org.big.mapper.BoardMapper">
+  	
+  	<select id="selectBoardList" resultType="org.big.dto.BoardDto">
+         <![CDATA[
+           SELECT
+              interior_estimate_id,
+              interior_estimate_title,
+              interior_estimate_created_at,
+              interior_estimate_status,
+              interior_estimate_name
+           FROM
+              interior_estimate_requests
+           
+           ORDER BY interior_estimate_id DESC
+        ]]>
+   </select>
+  </mapper>
