@@ -13,14 +13,20 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @Transactional
-public class BoardServiceImpl implements BoardService{
-	
-	@Autowired
-	private BoardMapper boardMapper;
-	
-	@Override
-	public List<BoardDto> selectBoardList() throws Exception {
-		// TODO Auto-generated method stub
-		return boardMapper.selectBoardList();
-	}
+public class BoardServiceImpl implements BoardService {
+    
+    @Autowired
+    private BoardMapper boardMapper;
+    
+    @Override
+    public List<BoardDto> selectBoardList() throws Exception {
+        // 게시글 목록 조회
+        return boardMapper.selectBoardList();
+    }
+    
+    @Override
+    public void insertBoard(BoardDto board) throws Exception {
+        // 게시글 삽입
+        boardMapper.insertBoard(board);
+    }
 }

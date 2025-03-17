@@ -17,17 +17,17 @@ public class MainController {
 
     @GetMapping("/")
     public String home() {
-        return "index"; // templates/index.html 로 연결
+        return "thymeleaf/index"; // templates/index.html 로 연결
     }
 
     @GetMapping("/review")
     public String review() {
-        return "review"; // templates/review.html
+        return "thymeleaf/review"; // templates/review.html
     }
     
     @RequestMapping("/estimate")
     public ModelAndView board()throws Exception{
-      ModelAndView mv = new ModelAndView("estimate");
+      ModelAndView mv = new ModelAndView("thymeleaf/estimate");
       
       List<BoardDto> list = BoardService.selectBoardList();
       mv.addObject("list",list);
@@ -37,6 +37,6 @@ public class MainController {
 
     @GetMapping("/cases")
     public String cases() {
-        return "cases"; // templates/cases.html
+        return "thymeleaf/cases"; // templates/cases.html
     }
 }

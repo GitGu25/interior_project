@@ -1,32 +1,28 @@
 package org.big.controller;
 
-import java.util.List;
-
 import org.big.dto.BoardDto;
-import org.big.mapper.BoardMapper;
 import org.big.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
-@RestController
-@RequestMapping("/estimate-requests")
+@Controller
 public class EstimateRequestController {
 
     @Autowired
-    private BoardService BoardService;
-    
-    @Autowired
-    private BoardMapper BoardMapper;
+    private BoardService boardService;
 
-//    @RequestMapping("/estimate")
-//    public ModelAndView board()throws Exception{
-//      ModelAndView mv = new ModelAndView("estimate");
-//      
-//      List<BoardDto> list = BoardService.selectBoardList();
-//      mv.addObject("list",list);
-//      
-//      return mv;
-//   }
+    // GET 요청으로 작성 페이지로 이동
+    @GetMapping("/estimate/write")
+    public String openBoardWrite() throws Exception {
+        return "thymeleaf/estimateWrite";  // 작성 화면 페이지
+    }
+
+ // POST 요청으로 게시글 작성
+    @PostMapping("/estimate/write")
+    public String insertBoard(BoardDto board) throws Exception {
+        boardService.insertBoard(board);  // 게시글 저장
+        return "redirect:/estimate-requests/estimate";  // 게시글 목록 페이지로 리다이렉트
+    }
 }
