@@ -23,6 +23,7 @@ body {
 	    justify-content: space-between;
 	    align-items: center;
 	    padding: 15px 60px;
+    	min-width: 350px; /* 최소 너비 설정 */
 	}
 	
 	/* 헤더 제목 */
@@ -39,6 +40,7 @@ body {
 	    padding: 0;
 	    margin: 0;
 	    display: flex;  /* 가로 정렬 */
+	    flex-wrap: nowrap; /* 줄 바꿈 방지 */
 	}
 	
 	/* 네비게이션 아이템 */
@@ -53,6 +55,7 @@ body {
 	    font-size: 18px;
 	    padding: 10px 15px;
 	    transition: 0.3s; /* 부드러운 효과 */
+	    white-space: nowrap; /* 줄 바꿈 방지 */
 	}
 	
 	/* 호버 효과 */
@@ -66,19 +69,57 @@ body {
 	    background-color: #DDD; /* 클릭 시 배경색 */
 	    border-radius: 10px;
 	}
+	
+	/* 햄버거 메뉴 버튼 (기본적으로 숨김) */
+	.menu-toggle {
+	    display: none;
+	    font-size: 24px;
+	    cursor: pointer;
+	    background: none;
+	    border: none;
+	    color: #2C3673;
+	}
+	
+	/* 헤더 반응형: 화면이 768px 이하일 때 */
+	@media screen and (max-width: 768px) {
+	    .navbar_menu {
+	        display: none; /* 기본 메뉴 숨기기 */
+	        flex-direction: column;
+	        position: absolute;
+	        top: 60px;
+	        right: 10px;
+	        background-color: white;
+	        border: 1px solid #ddd;
+	        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	        width: 200px;
+	        text-align: center;
+	    }
+	
+	    .navbar_menu.show {
+	        display: flex; /* 메뉴 표시 */
+	    }
+	
+	    .navbar_menu li {
+	        margin: 10px 0;
+	    }
+	
+	    .menu-toggle {
+	        display: block; /* 햄버거 버튼 보이기 */
+	    }
+	}
 
-hr {
-    border: 1px solid #EEE;  /* hr의 색상을 #EEE로 설정 */
-}
+	hr {
+	    border: 1px solid #EEE;  /* hr의 색상을 #EEE로 설정 */
+	}
 
 /* 푸터 스타일 */
 	.footer {
-	    background-color: #3E3E3E; /* 배경색 */
-	    color: white;
-	    display: flex;
-	    justify-content: space-between;  /* 푸터를 중앙으로 정렬 */
-	    padding: 80px 80px 40px;  /* 푸터 안의 여백 */
-	    width: 100%;
+    background-color: #3E3E3E; /* 배경색 */
+    color: white;
+    display: flex;
+    justify-content: space-between;  /* 푸터를 중앙으로 정렬 */
+    padding: 80px 80px 40px;  /* 푸터 안의 여백 */
+    width: 100%;
 	}
 	
 	.footer-left, .footer-right {
@@ -93,29 +134,33 @@ hr {
 	}
 	
 	.footer-left p {
-	    line-height: 0.1;  /* 텍스트 간격을 약간 띄우기 */
+	    line-height: 1.2;  /* 가독성을 유지하면서 간격 최소화 */
+	    font-size: 20px;
 	}
 	
 	.footer-right p {
-	    line-height: 1;  /* 텍스트 간격을 약간 띄우기 */
-		font-weight: lighter;
+	    line-height: 1.2;
+	    font-weight: lighter;
 	}
 	
-	/* 전화문의와 전화번호의 line-height 줄이기 */
-	.footer-left h2 {
-	    line-height: 0.4; /* '전화번호'와 '전화문의' 간격을 줄임 */
+	.footer-contact {
+	    display: flex;
+	    align-items: center; /* 아이콘과 텍스트 수직 정렬 */
+	    gap: 8px; /* 아이콘과 텍스트 사이 간격 */
 	}
 	
-	/*이미지 변환
-	invert(100%) : 색반전
-	hue-rotate(180deg): 색상을 좀 더 조정
-	transform: scale(0.8) scaleX(-1): 크기 80% 및 좌우 반전 */
+	.footer-phone {
+	    text-align: left; /* 전화번호 왼쪽 정렬 */
+	    font-weight: bold;
+	    font-size: 32px;
+	}
+	
+	/* 이미지 변환 */
 	.footer-left img {
 	    filter: invert(100%) hue-rotate(180deg);
-	    transform: scale(0.8) scaleX(-1);
+	    transform: scale(1.2) scaleX(-1);
 	    vertical-align: text-bottom;
 	}
-	
 	
 	/* 반응형 디자인 */
 	@media (max-width: 768px) {
@@ -126,8 +171,10 @@ hr {
 	
 	    .footer-left, .footer-right {
 	        width: 100%;  /* 한 줄로 전체 너비 차지 */
+	        align-items: flex-start; /* 작은 화면에서도 왼쪽 정렬 유지 */
 	    }
 	}
+
 	
 	.index_service-list {
     	width: 100%;

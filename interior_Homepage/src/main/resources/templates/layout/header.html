@@ -1,20 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>헤더</title>
 <link rel="stylesheet" type="text/css" href="/css/header_footer_index.css">
+<script>
+    function toggleMenu() {
+        var menu = document.querySelector(".navbar_menu");
+        menu.classList.toggle("show");
+    }
+</script>
 </head>
 <body>
-	<div class="header">
-		<h1>화목 홈 인테리어</h1>
-			<ul class="navbar_menu">
-				<li><a href="#">소개</a></li>
-				<li><a href="/cases">시공 사례</a></li>
-				<li><a href="/estimate">견적 문의</a></li>
-				<li><a href="/review">고객 후기</a></li>
-			</ul>
-	</div>
-	<hr>
+    <div class="header">
+        <h1>화목 홈 인테리어</h1>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button> <!-- 햄버거 버튼 -->
+        <ul class="navbar_menu">
+            <li><a href="#">소개</a></li>
+            <li><a href="/cases">시공 사례</a></li>
+            <li><a href="/estimate">견적 문의</a></li>
+            <li><a href="/review">고객 후기</a></li>
+        </ul>
+    </div>
+    <hr>
 </body>
 </html>
