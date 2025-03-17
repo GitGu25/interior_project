@@ -23,6 +23,6 @@ public class EstimateRequestController {
     @PostMapping("/estimate/write")
     public String insertBoard(BoardDto board) throws Exception {
         boardService.insertBoard(board);  // 게시글 저장
-        return "redirect:/estimate-requests/estimate";  // 게시글 목록 페이지로 리다이렉트
+        return "redirect:/estimate-requests/estimate";  // 게시글 목록 페이지로 리다이렉트  
     }
 }
