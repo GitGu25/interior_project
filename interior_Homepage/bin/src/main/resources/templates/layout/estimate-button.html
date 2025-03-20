@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>견적 문의 버튼</title>
+    <style>
+        .quote-button {
+            display: inline-block;
+           	padding: 12px 56px;
+	        background-color: #fff; /* 배경색을 흰색으로 설정 */
+	        color: #2C3673; /* 텍스트 색상 설정 */
+	        font-size: 36px;
+	        border: 2px solid #2C3673; /* 테두리 색상을 2C3673로 설정 */
+	        border-radius: 16px;
+	        text-align: center;
+	        text-decoration: none;
+	        transition: background-color 0.3s ease, color 0.3s ease;
+        	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); /* 오른쪽과 아래로 그림자 추가 */
+        }
+
+        .quote-button:hover {
+            background-color: #EEE;
+        }
+        
+        /* 클릭(액티브) 효과 */
+		.quote-button:active {
+		    background-color: #DDD;
+		}
+    </style>
+</head>
+<body>
+
+    <a href="/estimate" class="quote-button">견적 문의 하러 가기</a>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>이미지배너_페이지설명</title>
+<link rel="stylesheet" type="text/css" href="/css/imagebanner.css">
+</head>
+<body>
+	<div class="banner-container">
+	    <div class="banner-image">
+	        <img src="img/banner-image.jpg" alt="배너 이미지" />
+	        <div class="banner-text">
+	            <h2 th:text="${bannerTitle}">배너 제목</h2>
+	            <p th:text="${bannerDescription}">배너 설명</p>
+	        </div>
+	    </div>
+	</div>
+</body>
+</html>

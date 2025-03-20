@@ -19,10 +19,11 @@ public class BoardServiceImpl implements BoardService {
     private BoardMapper boardMapper;
     
     @Override
-    public List<BoardDto> selectBoardList() throws Exception {
-        // 게시글 목록 조회
-        return boardMapper.selectBoardList();
-    }
+   	public List<BoardDto> selectBoardList() throws Exception {
+   		// TODO Auto-generated method stub
+   		return boardMapper.selectBoardList();
+   	}
+       
     
     @Override
     public void insertBoard(BoardDto board) throws Exception {

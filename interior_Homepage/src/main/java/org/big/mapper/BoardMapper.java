@@ -9,7 +9,7 @@ import org.big.dto.BoardDto;
 public interface BoardMapper {
 
     // 게시글 목록 조회
-    List<BoardDto> selectBoardList() throws Exception;
+    List<BoardDto> selectBoardList();
 
     // 게시글 추가
     void insertBoard(BoardDto board) throws Exception;

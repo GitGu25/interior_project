@@ -1,0 +1,224 @@
+/* 기본 스타일 */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* 컨텐츠의 가로 크기를 제한하고 중앙 정렬 */
+.container {
+    width: 100%; /* 원하는 가로 비율 (예: 90%) */
+    max-width: 1440px; /* 최대 너비를 설정 (예: 1200px) */
+    margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 중앙 정렬 */
+    padding: 0 20px; /* 상하 여백, 좌우 여백 추가 (필요 시 조정) */
+}
+
+/* 헤더 스타일 */
+	.header {
+	    background-color: #FFF; /* 다크 그레이 배경 */
+	    color: white;
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	    padding: 15px 60px;
+    	min-width: 350px; /* 최소 너비 설정 */
+	}
+	
+	/* 헤더 제목 */
+	.header h1 {
+		color: #2C3673;
+	    margin: 0;
+	    font-size: 24px;
+	    font-weight: bold;
+	}
+	
+	/* 네비게이션 메뉴 */
+	.navbar_menu {
+	    list-style: none;
+	    padding: 0;
+	    margin: 0;
+	    display: flex;  /* 가로 정렬 */
+	    flex-wrap: nowrap; /* 줄 바꿈 방지 */
+	}
+	
+	/* 네비게이션 아이템 */
+	.navbar_menu li {
+	    margin-left: 20px;
+	}
+	
+	/* 네비게이션 링크 */
+	.navbar_menu li a {
+	    color: #777777;
+	    text-decoration: none;
+	    font-size: 18px;
+	    padding: 10px 15px;
+	    transition: 0.3s; /* 부드러운 효과 */
+	    white-space: nowrap; /* 줄 바꿈 방지 */
+	}
+	
+	/* 호버 효과 */
+	.navbar_menu li a:hover {
+	    background-color: #EEE;
+	    border-radius: 10px;
+	}
+	
+	/* 클릭(액티브) 효과 */
+	.navbar_menu li a:active {
+	    background-color: #DDD; /* 클릭 시 배경색 */
+	    border-radius: 10px;
+	}
+	
+	/* 햄버거 메뉴 버튼 (기본적으로 숨김) */
+	.menu-toggle {
+	    display: none;
+	    font-size: 24px;
+	    cursor: pointer;
+	    background: none;
+	    border: none;
+	    color: #2C3673;
+	}
+	
+	/* 헤더 반응형: 화면이 768px 이하일 때 */
+	@media screen and (max-width: 768px) {
+	    .navbar_menu {
+	        display: none; /* 기본 메뉴 숨기기 */
+	        flex-direction: column;
+	        position: absolute;
+	        top: 60px;
+	        right: 10px;
+	        background-color: white;
+	        border: 1px solid #ddd;
+	        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	        width: 200px;
+	        text-align: center;
+	    }
+	
+	    .navbar_menu.show {
+	        display: flex; /* 메뉴 표시 */
+	    }
+	
+	    .navbar_menu li {
+	        margin: 10px 0;
+	    }
+	
+	    .menu-toggle {
+	        display: block; /* 햄버거 버튼 보이기 */
+	    }
+	}
+
+	hr {
+	    border: 1px solid #EEE;  /* hr의 색상을 #EEE로 설정 */
+	}
+
+/* 푸터 스타일 */
+	.footer {
+    background-color: #3E3E3E; /* 배경색 */
+    color: white;
+    display: flex;
+    justify-content: space-between;  /* 푸터를 중앙으로 정렬 */
+    padding: 80px 80px 40px;  /* 푸터 안의 여백 */
+    width: 100%;
+	}
+	
+	.footer-left, .footer-right {
+	    width: 45%;  /* 왼쪽과 오른쪽 영역의 너비를 각각 45%로 설정 */
+	    display: flex;
+	    flex-direction: column;  /* 세로로 나열되도록 설정 */
+	    align-items: flex-start;  /* 항목들을 왼쪽 정렬 */
+	}
+	
+	.footer-left p, .footer-right p, .font-left h2 {
+	    margin: 2px 0;  /* 각 항목 간의 간격을 설정 */
+	}
+	
+	.footer-left p {
+	    line-height: 1.2;  /* 가독성을 유지하면서 간격 최소화 */
+	    font-size: 20px;
+	}
+	
+	.footer-right p {
+	    line-height: 1.2;
+	    font-weight: lighter;
+	}
+	
+	.footer-contact {
+	    display: flex;
+	    align-items: center; /* 아이콘과 텍스트 수직 정렬 */
+	    gap: 8px; /* 아이콘과 텍스트 사이 간격 */
+	}
+	
+	.footer-phone {
+	    text-align: left; /* 전화번호 왼쪽 정렬 */
+	    font-weight: bold;
+	    font-size: 32px;
+	}
+	
+	/* 이미지 변환 */
+	.footer-left img {
+	    filter: invert(100%) hue-rotate(180deg);
+	    transform: scale(1.2) scaleX(-1);
+	    vertical-align: text-bottom;
+	}
+	
+	/* 반응형 디자인 */
+	@media (max-width: 768px) {
+	    .footer {
+	        flex-direction: column; /* 세로로 정렬 */
+	        padding: 20px 40px;  /* 여백을 좁혀서 공간 활용 */
+	    }
+	
+	    .footer-left, .footer-right {
+	        width: 100%;  /* 한 줄로 전체 너비 차지 */
+	        align-items: flex-start; /* 작은 화면에서도 왼쪽 정렬 유지 */
+	    }
+	}
+
+	
+	.index_service-list {
+    	width: 100%;
+	    height: 400px;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    text-align: center;
+	    font-size: 36px;
+	    line-height: 1.5;
+	    background-color: #fff; /* 배경색은 필요에 맞게 수정 */
+	}
+	
+	.index_review {
+    	width: 100%;
+	    height: 480px;
+	    display: flex;
+	    justify-content: center;
+	    align-items: flex-start;
+	    font-size: 32px;
+	    background-color: #F1F1F1;
+		padding-top: 48px; /* 위쪽 간격을 48px로 설정 */
+	}
+	
+	.index_project {
+    	width: 100%;
+	    height: 704px;
+	    display: flex;
+	    justify-content: center;
+	    align-items: flex-start;
+	    font-size: 32px;
+	    background-color: #fff;
+		padding-top: 48px; /* 위쪽 간격을 48px로 설정 */
+	}
+
+	.estimateGo {
+    	width: 100%;
+	    height: 424px;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    text-align: center;
+	    background-color: #fff;
+		padding-top: 48px; /* 위쪽 간격을 48px로 설정 */
+	}
+	
+	

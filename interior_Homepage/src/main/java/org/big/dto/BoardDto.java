@@ -7,11 +7,12 @@ import lombok.Data;
 @Data
 public class BoardDto {
 
-	private int interiorEstimateId;	// 게시글 번호
-	private String interiorEstimateName; // 작성자 이름
-	private String interiorEstimatePassword; // 비번
-	private String interiorEstimateRequestText; // 내용
-	private InteriorEstimateStatus interiorEstimateStatus; // 상태 (Enum 적용)
-	private LocalDateTime interiorEstimateCreatedAt; // 작성일
-	private String interiorEstimateTitle; // 제목
+	private int iestiId;	// 게시글 번호
+	private String iestiName; // 작성자 이름
+	private String iestiPassword; // 비번
+	private String iestiTitle; // 제목
+	private String iestiRequestText; // 내용
+	private String iestiStatus; // 상태
+	private LocalDateTime iestiCreatedAt; // 작성일
+	
 }
