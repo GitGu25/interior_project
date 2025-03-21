@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>인테리어 홈페이지</title>
+<link rel="stylesheet" type="text/css" href="/css/header_footer_index.css">
 </head>
 <body>
+<div th:replace="layout/header"></div>
 <div class="container">
-	<div th:replace="layout/header"></div>
+	
 	<div th:replace="layout/bannerSlide"></div>
 	
 	<div class="index_service-list">
@@ -26,7 +28,8 @@
 		<div th:replace="layout/estimate-button"></div>
 	</div>
     
-    <div th:replace="layout/footer"></div>
+    
 </div>
+<div th:replace="layout/footer"></div>
 </body>
 </html>

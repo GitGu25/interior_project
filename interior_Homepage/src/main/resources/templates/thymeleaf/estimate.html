@@ -6,6 +6,11 @@
 <link rel="stylesheet" href="/css/estimate.css" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
+body{
+	margin: 0;
+	padding: 0;
+}
+
 .btn {
    margin: 5px; 
    padding: 5px 11px;
@@ -24,10 +29,11 @@
 </style>
 </head>
 <body>
-
-    <div th:replace="layout/header"></div>
-
-    <div class="container">
+<div th:replace="layout/header"></div>
+<div class="container">
+    
+    
+	<div th:replace="layout/imagebanner"></div>
         <h3>견적 문의 게시판</h3>
         <a href="/estimate/write" class="btn">견적 문의하기</a>
         <table class="board_list">
@@ -48,18 +54,13 @@
                 </tr>
             </thead>
             <tbody>
-				<div>
-				    <p>게시글 개수: <span th:text="${#lists.size(list)}"></span></p>
-				    <p th:text="${list}"></p> <!-- list 자체를 출력 -->
-				</div>
-
 				
 				<tr th:each="list:${list}" th:if="${list != null}">
 				    <td th:text="${list.iestiId}"></td>
 				    <td class="title">
 				        <a href="#" th:text="${list.iestiTitle}"></a>
 				    </td>
-				    <td th:text="${list.iestiCreatedAt != null ? #dates.format(item.iestiCreatedAt, 'yyyy-MM-dd HH:mm:ss') : '-'}"></td>
+				    <td th:text="${#temporals.format(list.iestiCreatedAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
 				    <td th:text="${list.iestiStatus}"></td>
 				    <td th:text="${list.iestiName}"></td>
 				</tr>
@@ -70,7 +71,7 @@
         </table>
     </div>
 
-    <div th:replace="layout/footer"></div>
-
+</div>
+<div th:replace="layout/footer"></div>
 </body>
 </html>

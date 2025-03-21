@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>이미지배너_페이지설명</title>
-<link rel="stylesheet" type="text/css" href="/css/imagebanner.css">
+<title>배너</title>
+<link rel="stylesheet" href="/css/imagebanner.css"> 
 </head>
 <body>
-	<div class="banner-container">
-	    <div class="banner-image">
-	        <img src="img/banner-image.jpg" alt="배너 이미지" />
-	        <div class="banner-text">
-	            <h2 th:text="${bannerTitle}">배너 제목</h2>
-	            <p th:text="${bannerDescription}">배너 설명</p>
-	        </div>
-	    </div>
-	</div>
+
+    <div class="banner">
+        <div class="banner-text">
+            <p th:text="${bannerTitle}">기본 제목</p>
+            <br>
+            <h2 th:text="${bannerDescription}">기본 설명 텍스트</h2>
+        </div>
+    </div>
+
 </body>
 </html>

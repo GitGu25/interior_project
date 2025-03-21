@@ -1,0 +1,61 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>회사 소개</title>
+<style>
+
+.intro {
+    padding-top: 200px;  /* 위쪽 여백 추가 */
+    padding-bottom: 80px;  /* 아래쪽 여백 추가 */
+}
+
+.intro p {
+    font-size: 64px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.intro p.intro-text {
+    font-size: 48px;
+    font-weight: normal;
+    text-align: center;
+}
+
+</style>
+</head>
+<body>
+<div th:replace="layout/header"></div>
+<div class="container">
+    <div th:replace="layout/imagebanner"></div>
+    
+    <div class="intro">
+        <p>뭐시기 저시기<br>
+        화목 홈 인테리어입니다</p>
+        
+        <p class="intro-text">
+        뭐라고 적죠 그러게 말입니다 아무튼 뭐라뭐라 적습니다<br>
+        솔직히 저도 뭐라 적어야할지 모르겠습니다 아무튼 그렇습니다<br>
+        어쨋든 이렇게 적고있는겁니다<br>
+        <br>
+        글이 너무 길면 읽기 싫어지니 문단도 띄워보았습니다<br>
+        근데 아직도 지어내야할 공간이 이렇게나 많다니 정말<br>
+        아무말 지어내기도 쉽지 않은 것 같습니다<br>
+        <br>
+        솔직히 회사 소개 전 잘안봅니다 보통 후기부터 누르고 봅니다<br>
+        그런데도 일단 눌러보는 사람이 있을 수도 있으니<br>
+        만들어보는겁니다 그렇게 됐습니다<br>
+        <br>
+        <br>
+        <strong>암튼 여기에 맡겨주시면 열심히 하겠습니다<br>
+        방문해주셔서 감사합니다</strong><br>
+        </p>
+    </div>
+    
+    <div class="estimateGo">
+		<div th:replace="layout/estimate-button"></div>
+	</div>
+    
+</div>
+<div th:replace="layout/footer"></div>
+</body>
+</html>

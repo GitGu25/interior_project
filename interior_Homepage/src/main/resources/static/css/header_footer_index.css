@@ -2,9 +2,14 @@
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
-    padding: 0;
+    padding-left: 10%;
+    padding-right: 10%;
     box-sizing: border-box;
     width: 100%;
+}
+ 
+a {
+	text-decoration-line: none;
 }
 
 /* 컨텐츠의 가로 크기를 제한하고 중앙 정렬 */

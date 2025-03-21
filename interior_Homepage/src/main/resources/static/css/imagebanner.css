@@ -1,32 +1,44 @@
-.banner-container {
-    position: relative;
+.banner {
     width: 100%;
-    height: 250px; /* 배너 높이 조정 */
-    margin-bottom: 30px; /* 페이지와 배너 사이 여백 */
-}
-
-.banner-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* 배너에 그림자 추가 */
+    max-width: 1440px;  /* 최대 너비 설정 */
+    height: 512px;  /* 높이 고정 */
+    background-image: url('/img/imagebanner.jpg'); /* 이미지 경로 설정 */
+    background-size: cover; /* 배경 이미지가 꽉 차도록 설정 */
+    background-position: center; /* 이미지 중앙 정렬 */
+    background-repeat: no-repeat; /* 반복 금지 */
+    margin: 0 auto; /* 가운데 정렬 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative; /* 자식 요소들이 절대 위치를 가질 수 있도록 설정 */
 }
 
 .banner-text {
-    position: absolute;
-    bottom: 20px; /* 이미지 하단에서 20px 위치 */
-    left: 20px;
-    color: #fff;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* 텍스트 그림자 */
-}
-
-.banner-text h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 0;
+    position: absolute; /* 텍스트를 배경 이미지와 정확히 겹치게 설정 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* 텍스트가 세로로 쌓이도록 설정 */
+    justify-content: center; /* 텍스트를 중앙에 위치시킴 */
+    align-items: center; /* 텍스트를 수평으로도 중앙 정렬 */
+    background: rgba(0, 0, 0, 0.6); /* 텍스트 배경을 반투명하게 설정 */
+    color: white; /* 텍스트 색상 설정 */
+    padding: 0 00px; /* 텍스트 여백 추가 */
+    border-radius: 10px;
+    text-align: center;
 }
 
 .banner-text p {
-    font-size: 1.2rem;
-    margin-top: 10px;
+    font-size: 48px; /* 제목 텍스트 크기 */
+    margin: 0;
+}
+
+.banner .banner-text h2 {
+    font-size: 64px; /* 설명 텍스트 크기 */
+    font-weight: bold;
+    margin: 0;
 }
