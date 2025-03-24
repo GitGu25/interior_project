@@ -124,7 +124,6 @@ a {
     display: flex;
     justify-content: space-between;  /* 푸터를 중앙으로 정렬 */
     padding: 80px 80px 40px;  /* 푸터 안의 여백 */
-    width: 100%;
 	}
 	
 	.footer-left, .footer-right {

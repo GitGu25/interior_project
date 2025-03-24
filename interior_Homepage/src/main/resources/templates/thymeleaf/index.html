@@ -7,29 +7,31 @@
 <link rel="stylesheet" type="text/css" href="/css/header_footer_index.css">
 </head>
 <body>
-<div th:replace="layout/header"></div>
-<div class="container">
+	<div th:replace="layout/header"></div>
 	
-	<div th:replace="layout/bannerSlide"></div>
-	
-	<div class="index_service-list">
-    	<h2>도배 | 장판 | 타일 | 싱크대 | 샷시 | 화장실 | 수리 | 철거</h2>
-    </div>
-    
-    <div class="index_review">
-    	<h3>최신 고객 후기</h3>
-    </div>
-    
-    <div class="index_project">
-    	<h3>시공 사례</h3>
-    </div>
-	
-	<div class="estimateGo">
-		<div th:replace="layout/estimate-button"></div>
+	<div class="container">
+		
+		<div th:replace="layout/bannerSlide"></div>
+		
+		<div class="index_service-list">
+	    	<h2>도배 | 장판 | 타일 | 싱크대 | 샷시 | 화장실 | 수리 | 철거</h2>
+	    </div>
+	    
+	    <div class="index_review">
+	    	<h3>최신 고객 후기</h3>
+	    </div>
+	    
+	    <div class="index_project">
+	    	<h3>시공 사례</h3>
+	    </div>
+		
+		<div class="estimateGo">
+			<div th:replace="layout/estimate-button"></div>
+		</div>
+	    
+	    
 	</div>
-    
-    
-</div>
-<div th:replace="layout/footer"></div>
+	
+	<div th:replace="layout/footer"></div>
 </body>
 </html>

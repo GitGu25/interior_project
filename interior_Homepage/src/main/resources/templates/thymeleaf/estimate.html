@@ -58,7 +58,7 @@ body{
 				<tr th:each="list:${list}" th:if="${list != null}">
 				    <td th:text="${list.iestiId}"></td>
 				    <td class="title">
-				        <a href="#" th:text="${list.iestiTitle}"></a>
+				        <a th:href="@{/estimate/view/{id}(id=${list.iestiId})}" th:text="${list.iestiTitle}"></a>
 				    </td>
 				    <td th:text="${#temporals.format(list.iestiCreatedAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
 				    <td th:text="${list.iestiStatus}"></td>

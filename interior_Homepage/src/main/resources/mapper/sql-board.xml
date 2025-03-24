@@ -35,4 +35,29 @@
 		)
 	</insert>
 
+	<!-- 게시글 상세 조회 -->
+    <select id="findById" parameterType="int" resultType="org.big.dto.BoardDto">
+	    SELECT iesti_id AS iestiId, 
+	           iesti_name AS iestiName, 
+	           iesti_title AS iestiTitle, 
+	           iesti_request_text AS iestiRequestText, 
+	           iesti_created_at AS iestiCreatedAt
+	    FROM in_estimate
+	    WHERE iesti_id = #{iestiId}
+	</select>
+
+
+    <!-- 게시글 수정 -->
+    <update id="update" parameterType="org.big.dto.BoardDto">
+        UPDATE in_estimate
+        SET iesti_title = #{iestiTitle},
+            iesti_request_text = #{iestiRequestText}
+        WHERE iesti_id = #{iestiId}
+    </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM in_estimate
+        WHERE iesti_id = #{iestiId}
+    </delete>
 </mapper>

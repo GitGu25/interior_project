@@ -1,7 +1,7 @@
 .banner {
     width: 100%;
     max-width: 1440px;  /* 최대 너비 설정 */
-    height: 512px;  /* 높이 고정 */
+    height: 400px;  /* 높이 고정 */
     background-image: url('/img/imagebanner.jpg'); /* 이미지 경로 설정 */
     background-size: cover; /* 배경 이미지가 꽉 차도록 설정 */
     background-position: center; /* 이미지 중앙 정렬 */

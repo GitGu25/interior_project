@@ -8,50 +8,41 @@
 <body>
     <div th:replace="layout/header"></div>
 
-    <div class="container">
-        <h3>게시글 작성</h3>
-        <form action="/estimate/write" method="post">
-            <table>
-                <tr>
-                    <th>제목</th>
-                    <td colspan="3">
-                        <input type="text" name="iestiTitle" required>
-                    </td>
-                </tr>
-                <tr>
-                    <th>작성자</th>
-                    <td>
-                        <input type="text" name="iestiName" required>
-                    </td>
-                    <th>상태</th>
-                    <td>
-                        <select name="iestiStatus" disabled>
-                            <option value="견적 문의">견적 문의</option>
-                            <!--<option value="시공 진행">시공 진행</option>
-                            <option value="시공 완료">시공 완료</option>-->
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>내용</th>
-                    <td colspan="3">
-                        <textarea name="iestiRequestText" class="editor"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <th>비밀번호</th>
-                    <td colspan="3">
-                        <input type="password" name="iestiPassword" required>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="4" class="btn-area">
-                        <button type="submit">작성하기</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
+    <div class="estimate-container">
+    <h3 class="estimate-title">게시글 작성</h3>
+    <form action="/estimate/write" method="post">
+        <table class="estimate-table">
+            <tr>
+                <th class="estimate-label">제목</th>
+                <td colspan="3"><input type="text" name="iestiTitle" class="input-title" required></td>
+            </tr>
+            <tr>
+                <th class="estimate-label">작성자</th>
+                <td><input type="text" name="iestiName" class="input-text" required></td>
+                <th class="estimate-label">상태</th>
+                <td>
+                    <select name="iestiStatus" class="input-text" disabled>
+                        <option value="견적 문의">견적 문의</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="estimate-label">내용</th>
+                <td colspan="3"><textarea name="iestiRequestText" class="textarea-content"></textarea></td>
+            </tr>
+            <tr>
+                <th class="estimate-label">비밀번호</th>
+                <td colspan="3"><input type="password" name="iestiPassword" class="input-password" required></td>
+            </tr>
+            <tr>
+                <td colspan="4" class="btn-area">
+                    <button type="submit" class="btn btn-submit">작성하기</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
 
     <div th:replace="layout/footer"></div>
 </body>
