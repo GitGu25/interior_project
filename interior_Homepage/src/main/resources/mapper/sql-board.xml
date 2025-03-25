@@ -60,4 +60,6 @@
         DELETE FROM in_estimate
         WHERE iesti_id = #{iestiId}
     </delete>
+    
+    
 </mapper>
