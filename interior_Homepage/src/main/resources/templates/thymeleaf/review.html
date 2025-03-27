@@ -18,27 +18,37 @@
 		    </div>
 		    <div class="review-item" th:each="review : ${reviews}">
 		        <div class="review-content">
-		            <h3 th:text="${review.title}" class="review-title"></h3>
+		            <h3 th:text="${review.ireviewTitle}" class="review-title"></h3>
 		            <p class="review-meta">
-		                <span th:text="${review.author}"></span> · 
-		                <span th:text="${review.date}"></span>
+		                <span th:text="${review.ireviewName}"></span> · 
+		                <span th:text="${review.ireviewCreatedAt}"></span>
 		            </p>
-		            <p class="review-text" th:text="${review.content}"></p>
+		            <p class="review-text" th:text="${review.ireviewText}"></p>
 		        </div>
 		        <div class="review-image">
-		            <img th:src="${review.image}" alt="시공 이미지">
+		            <!--<img th:src="${review.image}" alt="시공 이미지">-->
 		        </div>
 		    </div>
 		</div>
 
         <!-- 페이지네이션 -->
-        <div class="pagination">
-            <a href="#" class="prev">&lt; 이전</a>
-            <span class="page-numbers">
-                <a href="#" th:each="page : ${pages}" th:text="${page}"></a>
-            </span>
-            <a href="#" class="next">다음 &gt;</a>
-        </div>
+		<div class="pagination">
+		    <!-- 이전 페이지 링크 -->
+		    <a th:href="@{/review/list(page=${currentPage - 1}, size=${size})}" class="prev" 
+		       th:if="${currentPage > 1}">&lt; 이전</a>
+		    
+		    <!-- 페이지 번호 링크 (전체 페이지 수만큼 반복) -->
+		    <span class="page-numbers">
+		        <a th:each="page : ${#numbers.sequence(1, totalPages)}" 
+		           th:href="@{/review/list(page=${page}, size=${size})}" 
+		           th:text="${page}"></a>
+		    </span>
+		    
+		    <!-- 다음 페이지 링크 -->
+		    <a th:href="@{/review/list(page=${currentPage + 1}, size=${size})}" class="next" 
+		       th:if="${currentPage < totalPages}">다음 &gt;</a>
+		</div>
+
         <br>
     </div>
     

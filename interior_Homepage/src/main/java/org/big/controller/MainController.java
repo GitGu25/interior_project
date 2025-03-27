@@ -52,10 +52,8 @@ public class MainController {
     }
     
     @GetMapping("/review")
-    public String review(Model model) {
-        model.addAttribute("bannerTitle", "고객 후기");
-        model.addAttribute("bannerDescription", "시공 후기 게시판");
-        return "thymeleaf/review"; // templates/review.html
+    public String redirectToReview() {
+        return "redirect:/review/list"; // 리뷰 목록을 처리하는 컨트롤러로 리다이렉트
     }
     
 }
