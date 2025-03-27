@@ -22,6 +22,8 @@ public class ReviewController {
 
     @Autowired
     private ReviewService reviewService;
+    
+    
 
     // 📌 리뷰 목록 (페이지네이션 가능)
     @GetMapping("/list")

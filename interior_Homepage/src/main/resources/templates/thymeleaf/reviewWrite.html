@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>리뷰 작성</title>
+    <!--<link rel="stylesheet" href="/css/review.css" />-->
+</head>
+<body>
+    <div th:replace="layout/header"></div>
+
+    <div class="container">
+        <h2>리뷰 작성</h2>
+
+        <!-- 리뷰 작성 폼 -->
+        <form th:action="@{/review/write}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="reviewName">작성자 이름</label>
+                <input type="text" id="reviewName" name="reviewName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="reviewTitle">제목</label>
+                <input type="text" id="reviewTitle" name="reviewTitle" required>
+            </div>
+
+            <div class="form-group">
+                <label for="reviewText">내용</label>
+                <textarea id="reviewText" name="reviewText" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="reviewPassword">비밀번호</label>
+                <input type="password" id="reviewPassword" name="reviewPassword" required>
+            </div>
+
+            <div class="form-group">
+                <label for="reviewImage">이미지 첨부</label>
+                <input type="file" id="reviewImage" name="reviewImage"/>
+            </div>
+
+            <button type="submit">리뷰 작성</button>
+        </form>
+    </div>
+
+    <div th:replace="layout/footer"></div>
+</body>
+</html>
