@@ -10,7 +10,9 @@
     
     <div class="container">
         <h2 class="board-title">시공 후기 게시판</h2>
-        
+        <div class="write-review-btn">
+        	<a href="/review/write" class="btn">리뷰 작성하기</a>
+        </div>
         <!-- 후기 리스트 -->
 		<div class="review-list">
 		    <div th:if="${#lists.isEmpty(reviews)}">

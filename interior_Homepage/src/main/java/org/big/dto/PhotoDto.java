@@ -9,4 +9,5 @@ public class PhotoDto {
     private int iphotoReviewId;   // 리뷰 ID (외래 키)
     private String iphotoUrl;     // 사진 URL
     private String iphotoDescription;  // 사진 설명
+	
 }

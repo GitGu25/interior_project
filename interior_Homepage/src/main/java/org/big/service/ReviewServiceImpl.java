@@ -2,17 +2,28 @@ package org.big.service;
 
 import java.util.List;
 
+import org.big.common.FileUtils;
+import org.big.dto.PhotoDto;
 import org.big.dto.ReviewDto;
+import org.big.mapper.PhotoMapper;
 import org.big.mapper.ReviewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Service
 @Transactional
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewMapper reviewMapper;
+    
+    @Autowired
+    private FileUtils fileUtils;
+    
+    @Autowired
+    private PhotoMapper photoMapper;
 
     @Autowired
     public ReviewServiceImpl(ReviewMapper reviewMapper) {
@@ -38,9 +49,17 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void insertReview(ReviewDto reviewDto) throws Exception {
+    public void insertReview(ReviewDto reviewDto, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
         // 리뷰 추가 로직
         reviewMapper.insertReview(reviewDto);
+        
+		/*
+		 * List<PhotoDto> list = null; try { list =
+		 * fileUtils.parseFileInfo(reviewDto.getIreviewId(),
+		 * multipartHttpServletRequest); } catch (Exception e) { // TODO Auto-generated
+		 * catch block e.printStackTrace(); } if (CollectionUtils.isEmpty(list) ==
+		 * false) { photoMapper.insertPhoto(list); }
+		 */
     }
 
     @Override

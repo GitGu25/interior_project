@@ -3,6 +3,7 @@ package org.big.service;
 import java.util.List;
 
 import org.big.dto.ReviewDto;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface ReviewService {
 
@@ -13,7 +14,7 @@ public interface ReviewService {
     //getTotalPages(int size)는 서비스에서만 계산하도록 유지
     int getTotalPages(int size) throws Exception;
 
-	void insertReview(ReviewDto reviewDto) throws Exception; // 리뷰 추가
+	void insertReview(ReviewDto reviewDto, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception; // 리뷰 추가
 
 	ReviewDto getReviewById(int reviewId) throws Exception; // 특정 리뷰 조회
 
