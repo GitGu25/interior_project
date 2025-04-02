@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>리뷰 상세 화면</title>
+    <link rel="stylesheet" href="/css/reviewDetail.css" />
+</head>
+<body>
+    <div th:replace="layout/header"></div>
+    
+    <div class="reviewDetail-container">
+    	<div th:replace="layout/imagebanner"></div>
+        <h2 class="board-title">리뷰 상세화면</h2>
+        
+        <!-- 폼 시작 -->
+        <form id="frm" method="post">
+            <table class="review-detail">
+                <colgroup>
+                    <col width="*">
+                    <col width="24%">
+                    <col width="20%">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th scope="row">작성자</th>
+                        <td th:text="${review.ireviewName}"></td>
+                        <th scope="row">작성일</th>
+                        <td th:text="${review.ireviewCreatedAt}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">제목</th>
+                        <td colspan="3">
+                            <input type="text" id="ireviewTitle" name="ireviewTitle" class="input-title" th:value="${review.ireviewTitle}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="view-text">
+                            <textarea title="내용" id="ireviewText" name="ireviewText" class="textarea-content" th:text="${review.ireviewText}"></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- hidden으로 ID와 method 설정 -->
+            <input type="hidden" id="ireviewId" name="ireviewId" th:value="${review.ireviewId}">
+            <input type="hidden" id="method" name="_method">
+        </form>
+        
+        <!-- 버튼 그룹 -->
+        <div class="btn-group">
+            <a href="/review/list" id="list" class="btn btn-list">목록으로</a>
+            <a href="#this" id="edit" class="btn btn-edit">수정하기</a>
+            <a href="#this" id="delete" class="btn btn-delete">삭제하기</a>
+        </div>
+
+        <!-- jQuery 사용 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script type="text/javascript">
+		    $(document).ready(function(){
+		        var ireviewId = $("#ireviewId").val();
+		
+		        // 목록으로 이동
+		        $("#list").on("click", function(){
+		            location.href = "/review/list";  // 목록 페이지로 이동
+		        });
+		
+		        // 수정하기
+		        $("#edit").on("click", function(){
+					var frm = $("#frm")[0];
+					frm.action="/review/update";  // 리뷰 수정 처리 URL
+					frm.submit();
+				});
+				
+				// 삭제하기
+				$("#delete").on("click", function(){
+					var frm = $("#frm")[0];
+					frm.action="/review/delete";  // 리뷰 삭제 처리 URL
+					frm.submit();
+				});
+		    });
+		</script>
+    </div>
+    
+    <div th:replace="layout/footer"></div>
+</body>
+</html>
