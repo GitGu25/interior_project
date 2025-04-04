@@ -1,8 +1,10 @@
 package org.big.controller;
 
 import java.util.List;
+
 import org.big.dto.BoardDto;
 import org.big.service.BoardService;
+import org.big.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,9 @@ public class MainController {
     @Autowired
     private BoardService BoardService;
 
+    @Autowired
+    private ProjectService projectService;
+    
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("bannerTitle", "메인 페이지");
@@ -27,11 +32,9 @@ public class MainController {
         return "thymeleaf/intro"; // templates/intro.html
     }
 
-    @GetMapping("/cases")
-    public String cases(Model model) {
-        model.addAttribute("bannerTitle", "시공 사례");
-        model.addAttribute("bannerDescription", "시공사례 및 작업현장");
-        return "thymeleaf/cases"; // templates/cases.html
+    @GetMapping("/projects")
+    public String redirectToProjects() {
+        return "redirect:/projects/list"; // 프로젝트 목록을 처리하는 컨트롤러로 리다이렉트
     }
     
     @GetMapping("/estimate")

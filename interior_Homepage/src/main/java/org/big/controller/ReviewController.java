@@ -7,11 +7,7 @@ import org.big.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ReviewController {
@@ -96,7 +92,7 @@ public class ReviewController {
 
 	// 📌 리뷰 삭제 처리
 	@PostMapping("/review/delete")
-	public String deleteReview(@RequestParam("reviewId") int reviewId) throws Exception {
+	public String deleteReview(@RequestParam("ireviewId") int reviewId) throws Exception {
 		reviewService.deleteReview(reviewId); // 리뷰 삭제
 
 		return "redirect:/review/list"; // 삭제 후 목록 페이지로 이동

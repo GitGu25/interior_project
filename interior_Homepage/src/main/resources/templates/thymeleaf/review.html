@@ -7,7 +7,7 @@
 </head>
 <body>
     <div th:replace="layout/header"></div>
-    
+    <div th:replace="layout/imagebanner"></div>
     <div class="container">
         <h2 class="board-title">시공 후기 게시판</h2>
         <div class="write-review-btn">
@@ -46,7 +46,9 @@
 		    <span class="page-numbers">
 		        <a th:each="page : ${#numbers.sequence(1, totalPages)}" 
 		           th:href="@{/review/list(page=${page}, size=${size})}" 
-		           th:text="${page}"></a>
+		           th:text="${page}"
+		           th:classappend="${currentPage == page} ? 'active'">   
+		        </a>
 		    </span>
 		    
 		    <!-- 다음 페이지 링크 -->
