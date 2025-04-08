@@ -65,4 +65,12 @@ ALTER TABLE in_photos ADD CONSTRAINT uq_iphoto_filename UNIQUE (iphoto_filename)
 
 select * from in_estimate;
 
+
+
+CREATE SEQUENCE in_reviews_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
 commit;
