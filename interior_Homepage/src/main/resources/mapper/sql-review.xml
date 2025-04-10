@@ -23,7 +23,6 @@
 
     <!-- 리뷰 추가 -->
     <insert id="insertReview" parameterType="org.big.dto.ReviewDto">
-    
 	    <!-- 🔑 Oracle에서 PK 생성용 selectKey -->
 	    <selectKey keyProperty="ireviewId" resultType="long" order="BEFORE">
 	        SELECT in_reviews_seq.NEXTVAL FROM dual
@@ -31,6 +30,7 @@
 	    
         INSERT INTO in_reviews
         (
+        	ireview_id,  <!-- 반드시 추가 -->
             ireview_name,
             ireview_password,
             ireview_title,
@@ -39,6 +39,7 @@
         )
         VALUES
         (
+        	#{ireviewId}, <!-- 반드시 추가 -->
             #{ireviewName},
             #{ireviewPassword},
             #{ireviewTitle},

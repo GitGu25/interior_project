@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-@Transactional
+@Transactional 
 public class ReviewServiceImpl implements ReviewService {
 
 	private static final String UPLOAD_DIR = "C:/Temp/photo/images/";
@@ -52,7 +52,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	// 리뷰 저장 + 사진 업로드 및 저장
 	@Override
-	@Transactional
+	@Transactional 
 	public void reviewBundle(ReviewDto reviewDto) throws Exception {
 	    // 1. 리뷰 저장
 	    reviewMapper.insertReview(reviewDto);
@@ -69,6 +69,7 @@ public class ReviewServiceImpl implements ReviewService {
 	    // 3. 저장 경로 생성
 	    File dir = new File(UPLOAD_DIR);
 	    if (!dir.exists()) dir.mkdirs();
+	    System.out.println("파일저장경로생성: " + dir);
 
 	    // 4. 각 파일 처리
 	    for (MultipartFile photo : photos) {
@@ -77,6 +78,7 @@ public class ReviewServiceImpl implements ReviewService {
 	            photoMapper.insertPhoto(photoDto);
 	        }
 	    }
+	    System.out.println("파일처리함");
 	}
 
 	// ✅ 유틸 메서드: 파일 저장 + PhotoDto 생성
@@ -89,10 +91,12 @@ public class ReviewServiceImpl implements ReviewService {
 	    if (!allowedExtensions.contains(extension)) {
 	        throw new IllegalArgumentException("허용되지 않은 파일 형식입니다: " + extension);
 	    }
+	    System.out.println("확장자 검사");
 
 	    String newFilename = UUID.randomUUID().toString() + "_" + originalFilename;
 	    File destFile = new File(UPLOAD_DIR + newFilename);
 	    photo.transferTo(destFile); // 실제 파일 저장
+	    System.out.println("파일저장함");
 
 	    // PhotoDto 생성 및 설정
 	    PhotoDto photoDto = new PhotoDto();
@@ -101,7 +105,8 @@ public class ReviewServiceImpl implements ReviewService {
 	    photoDto.setIphotoFilename(newFilename);
 	    photoDto.setIphotoExtension(extension);
 	    photoDto.setIphotoUploadedAt(LocalDateTime.now());
-
+	    System.out.println("전달할값" + photoDto);
+	    
 	    return photoDto;
 	}
 

@@ -42,7 +42,8 @@
 					    <td colspan="4" class="review-images">
 					        <div class="image-gallery">
 					            <div th:each="photo : ${review.photos}">
-					                <img th:src="@{/uploads/{filename}(filename=${photo.imageUrl})}" alt="첨부 이미지" class="review-image">
+					                <img th:src="${photo.imageUrl}" alt="첨부 이미지" class="review-image">
+					            	<p th:text="${photo.imageUrl}"></p> <!-- 디버깅용 출력 (원하면 지워도 됩니다) -->
 					            </div>
 					        </div>
 					    </td>
