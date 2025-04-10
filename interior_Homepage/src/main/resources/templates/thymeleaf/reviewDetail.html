@@ -38,6 +38,15 @@
                             <textarea title="내용" id="ireviewText" name="ireviewText" class="textarea-content" th:text="${review.ireviewText}"></textarea>
                         </td>
                     </tr>
+                    <tr>
+					    <td colspan="4" class="review-images">
+					        <div class="image-gallery">
+					            <div th:each="photo : ${review.photos}">
+					                <img th:src="@{/uploads/{filename}(filename=${photo.imageUrl})}" alt="첨부 이미지" class="review-image">
+					            </div>
+					        </div>
+					    </td>
+					</tr>
                 </tbody>
             </table>
 

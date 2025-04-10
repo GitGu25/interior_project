@@ -12,7 +12,8 @@ public class ProjectDto {
     private String iprojectName;        // 작성자 이름
     private String iprojectTitle;       // 시공 사례 제목
     private String iprojectDescription; // 시공 사례 설명 (CLOB)
-    private String iprojectImageUrl;   // 대표 이미지 URL (추가됨)
+    private String iprojectImageUrl;   // 대표 이미지 URL // mapper에서 대표 이미지 filename 받아서 여기에 세팅
     private LocalDateTime iprojectCreatedAt;// 시공 사례 업로드 일시
     private List<PhotoDto> photos; // 관련 이미지 리스트
+
 }

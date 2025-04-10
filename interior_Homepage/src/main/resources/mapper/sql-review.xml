@@ -23,6 +23,12 @@
 
     <!-- 리뷰 추가 -->
     <insert id="insertReview" parameterType="org.big.dto.ReviewDto">
+    
+	    <!-- 🔑 Oracle에서 PK 생성용 selectKey -->
+	    <selectKey keyProperty="ireviewId" resultType="long" order="BEFORE">
+	        SELECT in_reviews_seq.NEXTVAL FROM dual
+	    </selectKey>
+	    
         INSERT INTO in_reviews
         (
             ireview_name,
@@ -37,7 +43,7 @@
             #{ireviewPassword},
             #{ireviewTitle},
             #{ireviewText},
-            sysdate
+            SYSTIMESTAMP
         )
     </insert>
 
@@ -50,7 +56,7 @@
             ireview_text AS ireviewText, 
             ireview_created_at AS ireviewCreatedAt
         FROM in_reviews
-        WHERE ireview_id = #{reviewId}
+        WHERE ireview_id = #{ireviewId}
     </select>
 
     <!-- 리뷰 수정 -->
@@ -65,7 +71,7 @@
     <!-- 리뷰 삭제 -->
     <delete id="deleteReview" parameterType="int">
         DELETE FROM in_reviews
-        WHERE ireview_id = #{reviewId}
+        WHERE ireview_id = #{ireviewId}
     </delete>
 
 </mapper>

@@ -9,46 +9,46 @@
     <insert id="insertPhoto">
         INSERT INTO in_photos
         (
-        	iphoto_filename,
-        	iphoto_extension,
-        	iphoto_uploaded_at,
-        	iphoto_project_id,
-        	iphoto_review_id)
+            iphoto_filename,
+            iphoto_extension,
+            iphoto_uploaded_at,
+            iphoto_project_id,
+            iphoto_review_id
+        )
         VALUES
         (
-        	#{iphotoFilename},
-        	#{iphotoExtension},
-        	SYSTIMESTAMP,
-        	#{projectId},
-        	#{reviewId}
+            #{iphotoFilename},
+            #{iphotoExtension},
+            SYSTIMESTAMP,
+            #{iphotoProjectId, jdbcType=INTEGER},
+            #{iphotoReviewId, jdbcType=INTEGER}
         )
     </insert>
 
     <!-- 특정 프로젝트에 속한 사진 조회 -->
     <select id="getPhotosByPId" resultType="org.big.dto.PhotoDto">
         SELECT
-        	iphoto_id,
-        	iphoto_filename,
-        	iphoto_extension,
-        	iphoto_uploaded_at,
-        	iphoto_project_id,
-        	iphoto_review_id
+            iphoto_id,
+            iphoto_filename,
+            iphoto_extension,
+            iphoto_uploaded_at,
+            iphoto_project_id,
+            iphoto_review_id
         FROM in_photos
-        WHERE iphoto_project_id = #{iprojectId}
+        WHERE iphoto_project_id = #{iphotoProjectId}
     </select>
 
     <!-- 특정 리뷰에 속한 사진 조회 -->
     <select id="getPhotosByRId" resultType="org.big.dto.PhotoDto">
         SELECT
-        	iphoto_id,
-        	iphoto_project_id,
-        	iphoto_review_id
-        	iphoto_filename,
-        	iphoto_extension,
-        	iphoto_uploaded_at,
-        	
+            iphoto_id,
+            iphoto_project_id,
+            iphoto_review_id,
+            iphoto_filename,
+            iphoto_extension,
+            iphoto_uploaded_at
         FROM in_photos
-        WHERE iphoto_review_id = #{ireviewId}
+        WHERE iphoto_review_id = #{iphotoReviewId}
     </select>
 
     <!-- 사진 삭제 -->

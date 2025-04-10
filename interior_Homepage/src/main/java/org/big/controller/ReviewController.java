@@ -2,18 +2,29 @@ package org.big.controller;
 
 import java.util.List;
 
+import org.big.dto.PhotoDto;
 import org.big.dto.ReviewDto;
+import org.big.service.PhotoService;
 import org.big.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
 public class ReviewController {
 
 	@Autowired
 	private ReviewService reviewService;
+	private final PhotoService photoService;
 
 	// 📌 리뷰 목록 (페이지네이션 가능)
 	@GetMapping("/review/list")
@@ -50,29 +61,31 @@ public class ReviewController {
 	// 📌 리뷰 작성 처리
 	@PostMapping("/review/write")
 	public String insertReview(@ModelAttribute ReviewDto reviewDto) throws Exception {
-		reviewService.insertReview(reviewDto); // 리뷰 데이터 저장
-		return "redirect:/review/list"; // 리뷰 목록 페이지로 이동
+	    reviewService.reviewBundle(reviewDto); // reviewDto에 파일도 포함되어 있음
+	    return "redirect:/review/list";
 	}
 
 	// 📌 특정 리뷰 조회
-	@GetMapping("/review/view/{reviewId}")
-	public String getReviewDetail(@PathVariable int reviewId, Model model) throws Exception {
-		ReviewDto review = reviewService.getReviewById(reviewId); // 리뷰 데이터 조회
-		// List<PhotoDto> photos = photoService.getPhotos(reviewId); // 해당 리뷰의 이미지 목록 조회
+	@GetMapping("/review/view/{ireviewId}")
+	public String getReviewDetail(@PathVariable int ireviewId, Model model) throws Exception {
+	    ReviewDto review = reviewService.getReviewById(ireviewId); // 리뷰 데이터 조회
 
-		if (review == null) {
-			return "error/404";
-		} // 리뷰가 없으면 404 페이지로 이동
-		model.addAttribute("review", review);
-		// model.addAttribute("photos", photos); // 이미지 리스트 추가
-		return "thymeleaf/reviewDetail"; // 리뷰 상세 페이지 반환
+	    if (review == null) {
+	        return "error/404";
+	    }
 
+	    // 📌 리뷰에 연결된 사진 리스트를 설정 (✔️ 여기 메서드 이름 수정됨)
+	    List<PhotoDto> photos = photoService.getPhotosByRId(ireviewId);
+	    review.setPhotos(photos); // 리뷰 객체에 이미지 리스트 주입
+
+	    model.addAttribute("review", review); // 리뷰 + 이미지 포함 상태로 전달
+	    return "thymeleaf/reviewDetail"; // 리뷰 상세 페이지 반환
 	}
 
 	// 📌 리뷰 수정 페이지
-	@GetMapping("/review/update/{reviewId}")
-	public String openReviewUpdate(@PathVariable int reviewId, Model model) throws Exception {
-		ReviewDto review = reviewService.getReviewById(reviewId);
+	@GetMapping("/review/update/{ireviewId}")
+	public String openReviewUpdate(@PathVariable int ireviewId, Model model) throws Exception {
+		ReviewDto review = reviewService.getReviewById(ireviewId);
 
 		if (review == null) {
 			return "error/404";
@@ -92,8 +105,8 @@ public class ReviewController {
 
 	// 📌 리뷰 삭제 처리
 	@PostMapping("/review/delete")
-	public String deleteReview(@RequestParam("ireviewId") int reviewId) throws Exception {
-		reviewService.deleteReview(reviewId); // 리뷰 삭제
+	public String deleteReview(@RequestParam("ireviewId") int ireviewId) throws Exception {
+		reviewService.deleteReview(ireviewId); // 리뷰 삭제
 
 		return "redirect:/review/list"; // 삭제 후 목록 페이지로 이동
 	}

@@ -13,7 +13,7 @@
 
 
         <!-- 리뷰 작성 폼 -->
-        <form action="/review/write" method="post" enctype="multipart/form-data">
+        <form th:action="@{/review/write}" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="reviewName">작성자 이름</label>
                 <input type="text" id="reviewName" name="ireviewName" required>
@@ -35,9 +35,27 @@
             </div>
 
             <div class="form-group">
-		        <label for="reviewImage">이미지 첨부</label>
-		        <input type="file" id="reviewImage" name="reviewImage" accept="image/*" />
+		        <label for="photos">이미지 첨부</label>
+		        <input type="file" name="uploadFiles" multiple>
 		    </div>
+
+			<script>
+			    document.getElementById('photos').addEventListener('change', function(event) {
+			        const preview = document.getElementById('preview');
+			        preview.innerHTML = ''; // 초기화
+			        for (const file of event.target.files) {
+			            const reader = new FileReader();
+			            reader.onload = function(e) {
+			                const img = document.createElement('img');
+			                img.src = e.target.result;
+			                img.style.width = '150px';
+			                img.style.margin = '5px';
+			                preview.appendChild(img);
+			            };
+			            reader.readAsDataURL(file);
+			        }
+			    });
+			</script>
 
             <button type="submit">리뷰 작성</button>
         </form>
