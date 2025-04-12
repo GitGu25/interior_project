@@ -60,6 +60,8 @@ ALTER TABLE in_photos ADD CONSTRAINT uq_iphoto_filename UNIQUE (iphoto_filename)
 
 CREATE SEQUENCE in_reviews_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
 
+ALTER TABLE in_reviews ADD ireview_types VARCHAR2(255); --추가함!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 select * from in_estimate;
 
 commit;
