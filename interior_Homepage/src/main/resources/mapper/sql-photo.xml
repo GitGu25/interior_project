@@ -26,7 +26,7 @@
     </insert>
 
     <!-- 특정 프로젝트에 속한 사진 조회 -->
-    <select id="getPhotosByPId" resultType="org.big.dto.PhotoDto">
+    <select id="getPhotosByPId" parameterType="long" resultType="org.big.dto.PhotoDto">
         SELECT
             iphoto_id,
             iphoto_filename,
@@ -56,5 +56,11 @@
         DELETE FROM in_photos
         WHERE iphoto_id = #{iphotoId}
     </delete>
+
+	<!-- 특정 사진 ID로 사진 1개 조회 -->
+	<select id="getPhotoById" parameterType="long" resultType="org.big.dto.PhotoDto">
+	    SELECT * FROM in_photos WHERE iphoto_id = #{iphotoId}
+	</select>
+
 
 </mapper>

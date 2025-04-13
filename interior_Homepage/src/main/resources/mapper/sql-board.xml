@@ -3,15 +3,20 @@
 
 <mapper namespace="org.big.mapper.BoardMapper">
 
-	<!-- 게시글 목록 조회 -->
-	  	<select id="selectBoardList" resultType="org.big.dto.BoardDto">
-  		<![CDATA[
-  			SELECT
-	            *
-	        FROM in_estimate
-	        ORDER BY iesti_id DESC
-  		]]>
-  		</select>
+    <!-- 게시글 목록 조회 -->
+    <select id="getBoardList" resultType="org.big.dto.BoardDto">
+        <![CDATA[
+            SELECT *
+            FROM in_estimate
+            ORDER BY iesti_id DESC
+            OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
+        ]]>
+    </select>
+
+	<!-- 전체 게시글 개수 조회 -->
+    <select id="getTotalBoardCount" resultType="int">
+        SELECT COUNT(*) FROM in_estimate
+    </select>
 
 	<!-- 게시글 추가 -->
 	<insert id="insertBoard" parameterType="org.big.dto.BoardDto">

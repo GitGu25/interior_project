@@ -22,10 +22,23 @@ public class BoardServiceImpl implements BoardService {
         this.boardMapper = boardMapper;
     }
 
+    // 페이지네이션을 적용한 게시글 목록 조회
     @Override
-    public List<BoardDto> selectBoardList() throws Exception {
-        System.out.println("게시글 목록: " + boardMapper.selectBoardList());
-        return boardMapper.selectBoardList();
+    public List<BoardDto> getBoardList(int page, int size) throws Exception {
+        int offset = (page - 1) * size; // 페이지 오프셋 계산
+        return boardMapper.getBoardList(offset, size);
+    }
+
+    // 전체 게시글 개수 조회 (페이지네이션용)
+    public int getTotalBoardCount() throws Exception {
+        return boardMapper.getTotalBoardCount();
+    }
+
+    // 전체 페이지 수 계산
+    @Override
+    public int getTotalPages(int size) throws Exception {
+        int totalBoards = getTotalBoardCount(); // 전체 게시글 수
+        return (int) Math.ceil((double) totalBoards / size); // 페이지 수 계산
     }
 
     @Override

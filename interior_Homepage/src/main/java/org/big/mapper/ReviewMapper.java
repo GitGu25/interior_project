@@ -23,4 +23,6 @@ public interface ReviewMapper {
 	void updateReview(ReviewDto reviewDto) throws Exception; // 리뷰 수정
 
 	void deleteReview(int ireviewId) throws Exception; // 리뷰 삭제
+
+	List<ReviewDto> selectLatestReviews();	//메인에 리뷰가져오기
 }

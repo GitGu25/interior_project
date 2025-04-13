@@ -1,8 +1,64 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title></title>
+    <meta charset="UTF-8">
+    <title>시공 후기 게시판</title>
+    <link rel="stylesheet" href="/css/review.css" />
 </head>
 <body>
+    <div th:replace="layout/header"></div>
+    <div th:replace="layout/imagebanner"></div>
+    <div class="container">
+        <h2 class="board-title">시공 후기 게시판</h2>
+        <div class="write-review-btn">
+        	<a href="/review/write" class="btn">리뷰 작성하기</a>
+        </div>
+        <!-- 후기 리스트 -->
+		<div class="review-list">
+		    <div th:if="${#lists.isEmpty(reviews)}">
+		        <p>리뷰가 없습니다.</p>
+		    </div>
+		    <div class="review-item" th:each="review : ${reviews}">
+		    <div class="review-content">
+			        <!-- 제목을 클릭하면 상세 페이지로 이동 -->
+			        <h3>
+			            <a th:href="@{/review/view/{id}(id=${review.ireviewId})}" 
+			               th:text="${review.ireviewTitle}" class="review-title">
+			            </a>
+			        </h3>
+			        
+			        <p class="review-meta">
+			            <span th:text="${review.ireviewName}"></span> · 
+			            <span th:text="${review.ireviewCreatedAt}"></span>
+			        </p>
+			        <p class="review-text" th:text="${review.ireviewText}"></p>
+			    </div>
+			</div>
+		</div>
+
+        <!-- 페이지네이션 -->
+		<div class="pagination">
+		    <!-- 이전 페이지 링크 -->
+		    <a th:href="@{/review/list(page=${currentPage - 1}, size=${size})}" class="prev" 
+		       th:if="${currentPage > 1}">&lt; 이전</a>
+		    
+		    <!-- 페이지 번호 링크 (전체 페이지 수만큼 반복) -->
+		    <span class="page-numbers">
+		        <a th:each="page : ${#numbers.sequence(1, totalPages)}" 
+		           th:href="@{/review/list(page=${page}, size=${size})}" 
+		           th:text="${page}"
+		           th:classappend="${currentPage == page} ? 'active'">   
+		        </a>
+		    </span>
+		    
+		    <!-- 다음 페이지 링크 -->
+		    <a th:href="@{/review/list(page=${currentPage + 1}, size=${size})}" class="next" 
+		       th:if="${currentPage < totalPages}">다음 &gt;</a>
+		</div>
+
+        <br>
+    </div>
+    
+    <div th:replace="layout/footer"></div>
 </body>
 </html>

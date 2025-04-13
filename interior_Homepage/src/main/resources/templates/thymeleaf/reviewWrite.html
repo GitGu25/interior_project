@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>리뷰 작성</title>
-<link rel="stylesheet" href="/css/review.css" />
+    <link rel="stylesheet" href="/css/review.css" />
 </head>
 <body>
     <div th:replace="layout/header"></div>
@@ -11,15 +11,14 @@
     <div class="container">
         <h3>리뷰 작성</h3>
 
-
         <!-- 리뷰 작성 폼 -->
-        <form th:action="@{/review/write}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/review/write}" method="post" enctype="multipart/form-data" id="reviewForm">
             <div class="form-group">
                 <label for="reviewName">작성자 이름</label>
                 <input type="text" id="reviewName" name="ireviewName" required>
             </div>
-			
-			<div class="form-group">
+
+            <div class="form-group">
                 <label for="reviewPassword">비밀번호</label>
                 <input type="password" id="reviewPassword" name="ireviewPassword" required>
             </div>
@@ -29,38 +28,118 @@
                 <input type="text" id="reviewTitle" name="ireviewTitle" required>
             </div>
 
+            <!-- 시공 항목 선택 영역 -->
+            <div class="review-types">
+                <label><input type="checkbox" name="ireviewTypes" value="도배"> 도배</label>
+                <label><input type="checkbox" name="ireviewTypes" value="장판"> 장판</label>
+                <label><input type="checkbox" name="ireviewTypes" value="타일"> 타일</label>
+                <label><input type="checkbox" name="ireviewTypes" value="싱크대"> 싱크대</label>
+                <label><input type="checkbox" name="ireviewTypes" value="샷시"> 샷시</label>
+                <label><input type="checkbox" name="ireviewTypes" value="화장실"> 화장실</label>
+                <label><input type="checkbox" name="ireviewTypes" value="수리"> 수리</label>
+                <label><input type="checkbox" name="ireviewTypes" value="철거"> 철거</label>
+            </div>
+
             <div class="form-group">
                 <label for="reviewText">내용</label>
                 <textarea id="reviewText" name="ireviewText" required></textarea>
             </div>
 
             <div class="form-group">
-		        <label for="photos">이미지 첨부</label>
-		        <input type="file" name="uploadFiles" multiple>
-		    </div>
+                <label for="photos">이미지 첨부</label>
+                <input type="file" name="uploadFiles" multiple id="photos">
+            </div>
 
-			<script>
-			    document.getElementById('photos').addEventListener('change', function(event) {
-			        const preview = document.getElementById('preview');
-			        preview.innerHTML = ''; // 초기화
-			        for (const file of event.target.files) {
-			            const reader = new FileReader();
-			            reader.onload = function(e) {
-			                const img = document.createElement('img');
-			                img.src = e.target.result;
-			                img.style.width = '150px';
-			                img.style.margin = '5px';
-			                preview.appendChild(img);
-			            };
-			            reader.readAsDataURL(file);
-			        }
-			    });
-			</script>
+            <!-- 이미지 미리보기 영역 -->
+            <div id="preview" style="display: flex; flex-wrap: wrap;"></div>
 
             <button type="submit">리뷰 작성</button>
         </form>
     </div>
 
     <div th:replace="layout/footer"></div>
+
+	<script>
+	    document.getElementById('reviewForm').addEventListener('submit', function(event) {
+	        // 체크된 체크박스 항목 확인
+	        const checkboxes = document.querySelectorAll("input[name='ireviewTypes']:checked");
+
+	        // 체크박스가 하나도 선택되지 않았을 경우
+	        if (checkboxes.length === 0) {
+	            alert("시공 항목을 하나 이상 선택해 주세요.");
+	            event.preventDefault(); // 폼 제출 막기
+	        }
+
+	        // 기존 파일 미리보기 이미지 처리 코드
+	        const fileInput = document.getElementById('photos');
+	        const dataTransfer = new DataTransfer();
+
+	        // 기존 선택된 파일들을 input에 덧붙이기
+	        selectedFiles.forEach(file => {
+	            dataTransfer.items.add(file);
+	        });
+
+	        // 수정된 파일 목록을 input에 설정
+	        fileInput.files = dataTransfer.files;
+	    });
+
+	    // 기존 파일 미리보기 및 삭제 기능 처리
+	    let selectedFiles = [];  // 선택된 파일들을 저장하는 배열
+
+	    document.getElementById('photos').addEventListener('change', function(event) {
+	        const preview = document.getElementById('preview');
+	        preview.innerHTML = ''; // 기존 미리보기 이미지 초기화
+
+	        // 기존 선택된 파일과 새로 선택된 파일을 합쳐서 배열에 넣기
+	        const allFiles = [...selectedFiles, ...Array.from(event.target.files)];
+	        selectedFiles = allFiles;  // 새로 갱신된 파일 목록 저장
+
+	        // 새로 선택한 파일들만 미리보기로 추가
+	        allFiles.forEach((file) => {
+	            const reader = new FileReader();
+	            reader.onload = function(e) {
+	                const imgContainer = document.createElement('div');
+	                imgContainer.style.margin = '5px';
+	                imgContainer.style.position = 'relative';
+
+	                const img = document.createElement('img');
+	                img.src = e.target.result;
+	                img.style.width = '150px';
+	                img.style.borderRadius = '8px';
+
+	                // 삭제 버튼 생성
+	                const deleteBtn = document.createElement('button');
+	                deleteBtn.textContent = '삭제';
+	                deleteBtn.style.position = 'absolute';
+	                deleteBtn.style.top = '5px';
+	                deleteBtn.style.right = '5px';
+	                deleteBtn.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
+	                deleteBtn.style.color = 'white';
+	                deleteBtn.style.border = 'none';
+	                deleteBtn.style.padding = '5px';
+	                deleteBtn.style.cursor = 'pointer';
+
+	                // 삭제 버튼 클릭 시 해당 이미지 제거
+	                deleteBtn.addEventListener('click', function() {
+	                    // 선택된 파일 배열에서 삭제
+	                    const index = selectedFiles.indexOf(file);
+	                    if (index > -1) {
+	                        selectedFiles.splice(index, 1);
+	                    }
+	                    imgContainer.remove();  // 미리보기에서 해당 이미지 제거
+	                });
+
+	                // 이미지와 삭제 버튼을 imgContainer에 추가
+	                imgContainer.appendChild(img);
+	                imgContainer.appendChild(deleteBtn);
+
+	                // 미리보기 영역에 추가
+	                preview.appendChild(imgContainer);
+	            };
+	            reader.readAsDataURL(file);
+	        });
+	    });
+	</script>
+
 </body>
 </html>

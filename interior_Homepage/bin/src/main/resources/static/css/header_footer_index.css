@@ -2,9 +2,14 @@
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
-    padding: 0;
+    padding-left: 10%;
+    padding-right: 10%;
     box-sizing: border-box;
     width: 100%;
+}
+ 
+a {
+	text-decoration-line: none;
 }
 
 /* 컨텐츠의 가로 크기를 제한하고 중앙 정렬 */
@@ -119,7 +124,6 @@ body {
     display: flex;
     justify-content: space-between;  /* 푸터를 중앙으로 정렬 */
     padding: 80px 80px 40px;  /* 푸터 안의 여백 */
-    width: 100%;
 	}
 	
 	.footer-left, .footer-right {

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.big.mapper.ReviewMapper">
+
+    <!-- 리뷰 목록 조회 (페이지네이션 추가) -->
+    <select id="getReviews" resultType="org.big.dto.ReviewDto">
+        SELECT
+            ireview_id AS ireviewId, 
+            ireview_name AS ireviewName, 
+            ireview_title AS ireviewTitle, 
+            ireview_text AS ireviewText, 
+            ireview_created_at AS ireviewCreatedAt
+        FROM in_reviews
+        ORDER BY ireview_id DESC
+        OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
+    </select>
+
+    <!-- 전체 리뷰 개수 조회 -->
+    <select id="getTotalReviewCount" resultType="int">
+        SELECT COUNT(*) FROM in_reviews
+    </select>
+
+    <!-- 리뷰 추가 -->
+    <insert id="insertReview" parameterType="org.big.dto.ReviewDto">
+	    <!-- 🔑 Oracle에서 PK 생성용 selectKey -->
+	    <selectKey keyProperty="ireviewId" resultType="long" order="BEFORE">
+	        SELECT in_reviews_seq.NEXTVAL FROM dual
+	    </selectKey>
+	    
+        INSERT INTO in_reviews
+        (
+        	ireview_id,  <!-- 반드시 추가 -->
+            ireview_name,
+            ireview_password,
+            ireview_title,
+            ireview_text,
+            ireview_created_at
+        )
+        VALUES
+        (
+        	#{ireviewId}, <!-- 반드시 추가 -->
+            #{ireviewName},
+            #{ireviewPassword},
+            #{ireviewTitle},
+            #{ireviewText},
+            SYSTIMESTAMP
+        )
+    </insert>
+
+    <!-- 특정 리뷰 조회 -->
+    <select id="getReviewById" parameterType="int" resultType="org.big.dto.ReviewDto">
+        SELECT
+            ireview_id AS ireviewId, 
+            ireview_name AS ireviewName, 
+            ireview_title AS ireviewTitle, 
+            ireview_text AS ireviewText, 
+            ireview_created_at AS ireviewCreatedAt
+        FROM in_reviews
+        WHERE ireview_id = #{ireviewId}
+    </select>
+
+    <!-- 리뷰 수정 -->
+    <update id="updateReview" parameterType="org.big.dto.ReviewDto">
+        UPDATE in_reviews
+        SET 
+            ireview_title = #{ireviewTitle},
+            ireview_text = #{ireviewText}
+        WHERE ireview_id = #{ireviewId}
+    </update>
+
+    <!-- 리뷰 삭제 -->
+    <delete id="deleteReview" parameterType="int">
+        DELETE FROM in_reviews
+        WHERE ireview_id = #{ireviewId}
+    </delete>
+
+</mapper>

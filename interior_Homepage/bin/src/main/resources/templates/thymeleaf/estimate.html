@@ -6,6 +6,11 @@
 <link rel="stylesheet" href="/css/estimate.css" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
+body{
+	margin: 0;
+	padding: 0;
+}
+
 .btn {
    margin: 5px; 
    padding: 5px 11px;
@@ -20,49 +25,53 @@
 }
 
 
-.btn:hover {background: rgb(192, 192, 192);}
+.btn:hover {background: #555;}
 </style>
 </head>
 <body>
-   <br>
-   <div th:replace="layout/header"></div>
-   <div class="container">
-      <h3>견적 문의 게시판</h3>
-      <a href="/estimate/write" class="btn">견적 문의하기</a>
-      <table class="board_list">
-         <colgroup>
-            <col width="12%"/>
-            <col width="*"/>
-            <col width="20%"/>
-            <col width="12%"/>
-            <col width="12%"/>
-         </colgroup>
-         <thead>
-            <tr>
-               <th scope="col">번호</th>
-               <th scope="col">제목</th>
-               <th scope="col">작성일</th>
-               <th scope="col">상태</th>
-               <th scope="col">작성자</th>
-            </tr>
-         </thead>
-         <tbody>
-            <tr th:if="${#lists.size(list) > 0}" th:each="list : ${list}">
-	            <td th:text="${list.interiorEstimateId}"></td>
-	            <td class="title">
-	               <a href="#" th:text="${list.interiorEstimateTitle}"></a>
-	            </td>
-	            <td th:text="${list.interiorEstimateCreatedAt != null ? #temporals.format(list.bRegistDay, 'yyyy-MM-dd HH:mm:ss') : '-'}"></td>
-	            <td th:text="${list.interiorEstimateStatus}"></td>
-	            <td th:text="${list.interiorEstimateName}"></td>
-            </tr>
-            <tr th:unless="${#lists.size(list) > 0}">
-               <td colspan="5">조회된 결과가 없습니다.</td>
-            </tr>
-         </tbody>
-      </table>
-   </div>
-   <div th:replace="layout/footer"></div>
-   <br>
+<div th:replace="layout/header"></div>
+<div class="container">
+    
+    
+	<div th:replace="layout/imagebanner"></div>
+        <h3>견적 문의 게시판</h3>
+        <a href="/estimate/write" class="btn">견적 문의하기</a>
+        <table class="board_list">
+            <colgroup>
+                <col width="10%"/>
+                <col width="40%"/>
+                <col width="20%"/>
+                <col width="15%"/>
+                <col width="15%"/>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">작성일</th>
+                    <th scope="col">상태</th>
+                    <th scope="col">작성자</th>
+                </tr>
+            </thead>
+            <tbody>
+				
+				<tr th:each="list:${list}" th:if="${list != null}">
+				    <td th:text="${list.iestiId}"></td>
+				    <td class="title">
+				        <a th:href="@{/estimate/view/{id}(id=${list.iestiId})}" th:text="${list.iestiTitle}"></a>
+				    </td>
+				    <td th:text="${#temporals.format(list.iestiCreatedAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+				    <td th:text="${list.iestiStatus}"></td>
+				    <td th:text="${list.iestiName}"></td>
+				</tr>
+                <tr th:unless="${list != null and #lists.size(list) > 0}">
+                    <td colspan="5">조회된 결과가 없습니다.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div th:replace="layout/footer"></div>
 </body>
 </html>

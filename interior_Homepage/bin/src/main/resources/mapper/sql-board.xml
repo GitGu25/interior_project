@@ -1,39 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.big.mapper.BoardMapper">
 
-    <!-- 게시글 목록 조회 -->
-    <select id="selectBoardList" resultType="org.big.dto.BoardDto">
-        SELECT
-            interior_estimate_id,
-            interior_estimate_title,
-            interior_estimate_created_at,
-            interior_estimate_status,
-            interior_estimate_name
-        FROM interior_estimate_requests
-        ORDER BY interior_estimate_id DESC
-    </select>
+	<!-- 게시글 목록 조회 -->
+	  	<select id="selectBoardList" resultType="org.big.dto.BoardDto">
+  		<![CDATA[
+  			SELECT
+	            *
+	        FROM in_estimate
+	        ORDER BY iesti_id DESC
+  		]]>
+  		</select>
 
-    <!-- 게시글 추가 -->
-    <insert id="insertBoard" parameterType="org.big.dto.BoardDto" useGeneratedKeys="true" keyProperty="interiorEstimateId">
-        INSERT INTO interior_estimate_requests (
-            interior_estimate_name,
-            interior_estimate_password,
-            interior_estimate_request_text,
-            interior_estimate_status,
-            interior_estimate_created_at,
-            interior_estimate_title
-        ) VALUES (
-            #{interiorEstimateName},
-            #{interiorEstimatePassword},
-            #{interiorEstimateRequestText},
-            #{interiorEstimateStatus},
-            SYSDATE,
-            #{interiorEstimateTitle}
-        )
-    </insert>
+	<!-- 게시글 추가 -->
+	<insert id="insertBoard" parameterType="org.big.dto.BoardDto">
+		INSERT INTO in_estimate
+		(
+		iesti_name,
+		iesti_password,
+		iesti_title,
+		iesti_status,
+		iesti_request_text,
+		iesti_created_at
+		)
+		VALUES
+		(
+		#{iestiName},
+		#{iestiPassword},
+		#{iestiTitle},
+		'견적 문의',
+		#{iestiRequestText},
+		SYSDATE
+		)
+	</insert>
 
+	<!-- 게시글 상세 조회 -->
+    <select id="findById" parameterType="int" resultType="org.big.dto.BoardDto">
+	    SELECT iesti_id AS iestiId, 
+	           iesti_name AS iestiName, 
+	           iesti_title AS iestiTitle, 
+	           iesti_request_text AS iestiRequestText, 
+	           iesti_created_at AS iestiCreatedAt
+	    FROM in_estimate
+	    WHERE iesti_id = #{iestiId}
+	</select>
+
+
+    <!-- 게시글 수정 -->
+    <update id="update" parameterType="org.big.dto.BoardDto">
+        UPDATE in_estimate
+        SET iesti_title = #{iestiTitle},
+            iesti_request_text = #{iestiRequestText}
+        WHERE iesti_id = #{iestiId}
+    </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM in_estimate
+        WHERE iesti_id = #{iestiId}
+    </delete>
+    
+    
 </mapper>

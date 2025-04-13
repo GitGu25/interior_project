@@ -17,9 +17,25 @@
 	    	<h2>도배 | 장판 | 타일 | 싱크대 | 샷시 | 화장실 | 수리 | 철거</h2>
 	    </div>
 	    
-	    <div class="index_review">
-	    	<h3>최신 고객 후기</h3>
-	    </div>
+		<div class="index_review">
+		    <h3 class="index-review-title">최신 고객 후기</h3>
+
+		    <div class="index-review-list">
+		        <div class="index-review-box" th:each="review : ${latestReviews}">
+					<!-- 도배,장판 -> 도배 | 장판 으로 출력 -->
+					<div class="index-review-types" 
+					     th:text="${#strings.replace(review.ireviewTypes, ',', ' | ')}"></div>
+						 
+		            <div class="index-review-text" th:text="${#strings.abbreviate(review.ireviewText, 50)}">후기 내용 일부</div>
+		            <div class="index-review-info">
+		                <span th:text="${review.ireviewName}">작성자</span> |
+		                <span th:text="${#temporals.format(review.ireviewCreatedAt, 'yyyy-MM-dd')}">작성일</span>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+
+
 	    
 	    <div class="index_project">
 	    	<h3>시공 사례</h3>

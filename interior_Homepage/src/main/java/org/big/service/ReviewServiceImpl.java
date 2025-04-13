@@ -35,9 +35,20 @@ public class ReviewServiceImpl implements ReviewService {
 	// 리뷰 목록 조회 (페이지네이션 적용)
 	@Override
 	public List<ReviewDto> getReviews(int page, int size) throws Exception {
-		int offset = (page - 1) * size; // 페이지 오프셋 계산
-		return reviewMapper.getReviews(offset, size);
+	    int offset = (page - 1) * size; // 페이지 오프셋 계산
+	    List<ReviewDto> reviews = reviewMapper.getReviews(offset, size);
+
+	    // 각 리뷰에 연결된 첫 번째 사진의 경로를 thumbUrl에 설정
+	    for (ReviewDto review : reviews) {
+	        List<PhotoDto> photos = photoMapper.getPhotosByRId(review.getIreviewId());
+	        if (!photos.isEmpty()) {
+	            String thumbUrl = "/uploads/" + photos.get(0).getIphotoFilename(); // 첫 번째 사진의 경로
+	            review.setThumbUrl(thumbUrl); // 리뷰에 thumbUrl 설정
+	        }
+	    }
+	    return reviews;
 	}
+
 
 	// 전체 리뷰 개수 조회 (페이지네이션용)
 	public int getTotalReviewCount() throws Exception {
@@ -123,9 +134,51 @@ public class ReviewServiceImpl implements ReviewService {
 		reviewMapper.updateReview(reviewDto);
 	}
 
+	// 새로 추가된 텍스트 + 이미지 함께 수정하는 메서드
+	@Override
+	@Transactional
+	public void updateRBundle(ReviewDto reviewDto, List<Long> deletePhotoIds) throws Exception {
+	    // 1. 리뷰 본문 수정
+	    reviewMapper.updateReview(reviewDto);
+	    Long ireviewId = reviewDto.getIreviewId(); // 수정할 리뷰 ID
+
+	    // 2. 삭제할 이미지가 있다면 삭제
+	    if (deletePhotoIds != null && !deletePhotoIds.isEmpty()) {
+	    	for (Long photoId : deletePhotoIds) {
+	    	    PhotoDto photoDto = photoMapper.getPhotoById(photoId); // 🔄 올바른 메서드로 변경
+	    	    if (photoDto != null) {
+	    	        File file = new File(UPLOAD_DIR + photoDto.getIphotoFilename());
+	    	        if (file.exists()) {
+	    	            file.delete();
+	    	        }
+	    	        photoMapper.deletePhoto(photoId);
+	    	    }
+	    	}
+	    }
+
+	    // 3. 새 이미지 업로드 처리
+	    List<MultipartFile> photos = reviewDto.getUploadFiles();
+	    if (photos != null && !photos.isEmpty()) {
+	        for (MultipartFile photo : photos) {
+	            if (!photo.isEmpty()) {
+	                PhotoDto photoDto = saveFileAndCreateDto(photo, ireviewId); // 파일 저장 및 DTO 생성
+	                photoMapper.insertPhoto(photoDto); // DB에 새로운 사진 저장
+	            }
+	        }
+	    }
+	}
+
+	
 	// 리뷰 삭제
 	@Override
 	public void deleteReview(int ireviewId) throws Exception {
 		reviewMapper.deleteReview(ireviewId);
 	}
+	
+	//메인에 리뷰가져오기
+	@Override
+	public List<ReviewDto> getLatestReviews() {
+	    return reviewMapper.selectLatestReviews();
+	}
+
 }

@@ -20,4 +20,8 @@ public interface PhotoMapper {
 
     // 사진 삭제
     void deletePhoto(@Param("iphotoId") Long iphotoId);
+
+    // 특정 사진 ID로 사진 1개 조회
+    PhotoDto getPhotoById(@Param("iphotoId") Long iphotoId);
+
 }

@@ -1,138 +1,365 @@
+/* 기본 스타일 설정 */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
 
 .container {
-    width: 80%;
-    max-width: 900px;
-    margin: 20px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    position: relative; /* 내부 요소들을 상대적으로 배치 */
+  width: 100%;
+  max-width: 1140px;
+  padding: 20px 15px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  box-sizing: border-box;
 }
 
-.page-title {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* 리뷰 작성 버튼을 페이지 상단 우측에 배치 */
-.write-review-btn {
-    margin-bottom: 20px; /* 버튼과 내용 간의 공간 */
-    text-align: right; /* 버튼을 오른쪽에 정렬 */
-}
-
-/* 버튼 스타일 */
 .btn {
-    margin: 5px; 
-    padding: 5px 11px;
-    color: #fff !important;
-    display: inline-block; 
-    background-color: #363636;
-    vertical-align: middle; 
-    border-radius: 4px !important;
-    cursor: pointer;
-    border: none;
+  margin: 8px;
+  padding: 8px 16px;
+  color: #fff;
+  background-color: #363636;
+  display: inline-block;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  vertical-align: middle;
 }
 
 .btn:hover {
-    background: #555;
+  background: #555;
 }
 
-/* 리뷰 리스트 아래로 떨어지게 만들기 위한 마진 */
+/* 버튼 오른쪽 정렬 */
+.btn-right {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+a.review-title {
+  color: black;
+  text-decoration: none;
+}
+
+/* 공통 스타일: .review-list, .review-item, .review-content 등 */
 .review-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 20px; /* 버튼과 충분한 공간을 둡니다 */
+  width: 100%;
+  border-top: 3px solid #777;
+  border-bottom: 1px solid #ccc;
+  border-collapse: collapse;
+  display: flex;
+  flex-direction: column;
 }
 
 .review-item {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background: #fff;
+  border-bottom: 2px solid #d9d9d9;
+  border-radius: 5px;
+  box-sizing: border-box;
+  min-height: 260px;
+  height: 320px;
+  overflow: hidden;
+}
+
+.review-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .review-content {
-    flex: 1;
+  flex: 1;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.review-title,
+.review-types,
+.review-text,
+.review-author {
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
 .review-title {
-    font-size: 18px;
-    font-weight: bold;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.review-types {
+  font-weight: lighter;
 }
 
 .review-text {
-    font-size: 14px;
-    color: #555;
+  color: #555;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .review-author {
-    font-size: 12px;
-    color: #888;
+  color: #888;
 }
 
-.review-image img {
-    width: 120px;
-    height: auto;
-    border-radius: 5px;
+/* 썸네일 이미지 스타일 */
+.review-thumbnail {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-/* 페이지네이션 공통 스타일 */
-.pagination {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    gap: 10px; 
-    margin-top: 20px;
+.review-thumbnail img {
+  width: 360px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.pagination a {
-    text-decoration: none;
-    color: #333;
-    padding: 8px 12px;
-    margin: 0 5px;
-    border-radius: 4px;
-    background: #eee;
-    transition: background 0.3s, color 0.3s;
-}
-
-.pagination a:hover {
-    background: #ccc;
-}
-
-/* 현재 페이지 강조 */
-.pagination a.active {
-    background: #363636;
-    color: white;
-    font-weight: bold;
-    pointer-events: none; /* 클릭 방지 */
-}
-
-/* 갤러리 스타일 */
-.gallery-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 반응형: 최소 250px, 최대 1fr */
+/* 반응형 스타일 */
+@media (max-width: 1024px) {
+  .review-list {
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 20px;
-    text-align: center;
+    justify-content: center;
+  }
+
+  .review-item {
+    flex-direction: column;
+    width: 45%;
+    height: auto;
+    padding: 20px;
+  }
+
+  .review-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .review-thumbnail {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .review-thumbnail img {
+    width: 100%;
+    height: auto;
+  }
+
+  .review-content {
+    width: 100%;
+    padding: 0;
+  }
+
+  .review-title,
+  .review-types,
+  .review-text,
+  .review-author {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .review-item {
+    width: 100%;
+  }
+
+  .review-image,
+  .review-detail-images {
+    width: 100%;
+  }
+
+  .input-title, .textarea-content {
+    font-size: 16px;
+  }
+
+  .review-detail-images {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* 리뷰 테이블 스타일 */
+.review-detail {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.review-detail th, .review-detail td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+/* 리뷰 작성 폼 스타일 */
+.input-title, .textarea-content {
+  width: 99%;
+  padding: 24px 0px 24px 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 32px;
+}
+
+.textarea-content {
+  height: 200px;
+  resize: vertical;
+}
+
+/* 리뷰 이미지 갤러리 스타일 */
+.review-image {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .image-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 15px;
+	display: flex;
+	 flex-wrap: nowrap;  /* 오른쪽으로 쭉 나열되게 함 */
+	 overflow-x: auto;
+  gap: 10px;
 }
 
-.review-image {
-    width: 200px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+.review-detail-images {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+/* 버튼 그룹 스타일 */
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #363636;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #555;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#delete {
+    margin-left: auto;
+    background-color: #d9534f;
+}
+
+#delete:hover {
+  background-color: #c9302c;
+}
+
+/* 리뷰 수정 페이지 스타일 */
+.board-title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #3a9ad9;
+  outline: none;
+}
+
+.review-types {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.review-types label {
+  font-weight: normal;
+  margin-right: 15px;
+}
+
+.form-group button {
+  padding: 12px 30px;
+  background-color: #363636;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.form-group button:hover {
+  background-color: #555;
+}
+
+.btn-group a {
+  padding: 10px 20px;
+  background-color: #363636;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.btn-group a:hover {
+  background-color: #555;
+}
+
+/* 버튼 오른쪽 정렬 */
+#delete {
+  margin-left: auto;
+  background-color: #d9534f;
+}
+
+#delete:hover {
+  background-color: #c9302c;
 }

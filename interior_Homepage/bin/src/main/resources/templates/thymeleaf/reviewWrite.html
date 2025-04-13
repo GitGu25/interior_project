@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>리뷰 작성</title>
+<link rel="stylesheet" href="/css/review.css" />
+</head>
+<body>
+    <div th:replace="layout/header"></div>
+
+    <div class="container">
+        <h3>리뷰 작성</h3>
+
+
+        <!-- 리뷰 작성 폼 -->
+        <form th:action="@{/review/write}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="reviewName">작성자 이름</label>
+                <input type="text" id="reviewName" name="ireviewName" required>
+            </div>
+			
+			<div class="form-group">
+                <label for="reviewPassword">비밀번호</label>
+                <input type="password" id="reviewPassword" name="ireviewPassword" required>
+            </div>
+
+            <div class="form-group">
+                <label for="reviewTitle">제목</label>
+                <input type="text" id="reviewTitle" name="ireviewTitle" required>
+            </div>
+
+            <div class="form-group">
+                <label for="reviewText">내용</label>
+                <textarea id="reviewText" name="ireviewText" required></textarea>
+            </div>
+
+            <div class="form-group">
+		        <label for="photos">이미지 첨부</label>
+		        <input type="file" name="uploadFiles" multiple>
+		    </div>
+
+			<script>
+			    document.getElementById('photos').addEventListener('change', function(event) {
+			        const preview = document.getElementById('preview');
+			        preview.innerHTML = ''; // 초기화
+			        for (const file of event.target.files) {
+			            const reader = new FileReader();
+			            reader.onload = function(e) {
+			                const img = document.createElement('img');
+			                img.src = e.target.result;
+			                img.style.width = '150px';
+			                img.style.margin = '5px';
+			                preview.appendChild(img);
+			            };
+			            reader.readAsDataURL(file);
+			        }
+			    });
+			</script>
+
+            <button type="submit">리뷰 작성</button>
+        </form>
+    </div>
+
+    <div th:replace="layout/footer"></div>
+</body>
+</html>

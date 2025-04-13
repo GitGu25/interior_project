@@ -10,7 +10,8 @@
             ireview_name AS ireviewName, 
             ireview_title AS ireviewTitle, 
             ireview_text AS ireviewText, 
-            ireview_created_at AS ireviewCreatedAt
+            ireview_created_at AS ireviewCreatedAt,
+            ireview_types AS ireviewTypes  <!-- 새로 추가된 컬럼 -->
         FROM in_reviews
         ORDER BY ireview_id DESC
         OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
@@ -35,6 +36,7 @@
             ireview_password,
             ireview_title,
             ireview_text,
+            ireview_types, <!-- 새로 추가된 컬럼 -->
             ireview_created_at
         )
         VALUES
@@ -44,6 +46,7 @@
             #{ireviewPassword},
             #{ireviewTitle},
             #{ireviewText},
+            #{ireviewTypes}, <!-- 새로 추가된 컬럼 -->
             SYSTIMESTAMP
         )
     </insert>
@@ -55,7 +58,8 @@
             ireview_name AS ireviewName, 
             ireview_title AS ireviewTitle, 
             ireview_text AS ireviewText, 
-            ireview_created_at AS ireviewCreatedAt
+            ireview_created_at AS ireviewCreatedAt,
+            ireview_types AS ireviewTypes  <!-- 새로 추가된 컬럼 -->
         FROM in_reviews
         WHERE ireview_id = #{ireviewId}
     </select>
@@ -65,7 +69,8 @@
         UPDATE in_reviews
         SET 
             ireview_title = #{ireviewTitle},
-            ireview_text = #{ireviewText}
+            ireview_text = #{ireviewText},
+            ireview_types = #{ireviewTypes} <!-- 새로 추가된 컬럼 -->
         WHERE ireview_id = #{ireviewId}
     </update>
 
@@ -74,5 +79,21 @@
         DELETE FROM in_reviews
         WHERE ireview_id = #{ireviewId}
     </delete>
+
+	<select id="selectLatestReviews" resultType="org.big.dto.ReviewDto">
+	    <![CDATA[
+	        SELECT
+	            ireview_id AS ireviewId,
+	            ireview_name AS ireviewName,
+	            ireview_text AS ireviewText,
+	            ireview_types AS ireviewTypes,
+	            ireview_created_at AS ireviewCreatedAt
+	        FROM (
+	            SELECT * FROM in_reviews ORDER BY ireview_id DESC
+	        )
+	        WHERE ROWNUM <= 3
+	    ]]>
+	</select>
+
 
 </mapper>

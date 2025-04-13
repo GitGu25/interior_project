@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>리뷰 상세 화면</title>
-    <link rel="stylesheet" href="/css/reviewDetail.css" />
+    <link rel="stylesheet" href="/css/review.css" />
 </head>
 <body>
     <div th:replace="layout/header"></div>
     
-    <div class="reviewDetail-container">
+    <div class="container">
     	<div th:replace="layout/imagebanner"></div>
         <h2 class="board-title">리뷰 상세화면</h2>
         
@@ -39,7 +39,7 @@
                         </td>
                     </tr>
                     <tr>
-					    <td colspan="4" class="review-images">
+					    <td colspan="4" class="review-detail-images">
 					        <div class="image-gallery">
 					            <div th:each="photo : ${review.photos}">
 					                <img th:src="${photo.imageUrl}" alt="첨부 이미지" class="review-image">
@@ -57,11 +57,12 @@
         </form>
         
         <!-- 버튼 그룹 -->
-        <div class="btn-group">
-            <a href="/review/list" id="list" class="btn btn-list">목록으로</a>
-            <a href="#this" id="edit" class="btn btn-edit">수정하기</a>
-            <a href="#this" id="delete" class="btn btn-delete">삭제하기</a>
-        </div>
+		<div class="button-group">
+		    <a href="/review/list" id="list" class="btn btn-list">목록으로</a>
+		    <a th:href="@{/review/update/{ireviewId}(ireviewId=${review.ireviewId})}" class="btn btn-edit">수정하기</a>
+		    <a href="#this" id="delete" class="btn btn-delete">삭제하기</a>
+		</div>
+
 
         <!-- jQuery 사용 -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -74,12 +75,6 @@
 		            location.href = "/review/list";  // 목록 페이지로 이동
 		        });
 		
-		        // 수정하기
-		        $("#edit").on("click", function(){
-					var frm = $("#frm")[0];
-					frm.action="/review/update";  // 리뷰 수정 처리 URL
-					frm.submit();
-				});
 				
 				// 삭제하기
 				$("#delete").on("click", function(){

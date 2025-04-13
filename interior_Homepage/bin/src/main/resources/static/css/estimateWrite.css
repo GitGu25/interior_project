@@ -1,0 +1,115 @@
+/* ----------- 기본적인 스타일 ----------- */
+body {
+    background-color: transparent; /* 배경색 제거 */
+    margin: 0;
+    padding: 0;
+}
+
+/* ----------- 공통 컨테이너 스타일 ----------- */
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 80px;
+}
+
+/* ----------- 테이블 스타일 ----------- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 14px;
+}
+
+th {
+    background-color: #f8f8f8;
+    text-align: center;
+    width: 15%;
+}
+
+td {
+    width: 35%;
+}
+
+.board-title {
+    text-align: center; /* 텍스트 중앙 정렬 */
+    margin: 40px 0px 20px 0px; /* 위아래 여백 추가 (필요에 따라 조정 가능) */
+}
+
+/* ----------- 입력 필드 스타일 ----------- */
+input[type="text"], input[type="password"], select, textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 200px;
+    resize: vertical;
+}
+
+/* ----------- 버튼 스타일 ----------- */
+.btn-area {
+    text-align: center;  /* 버튼을 중앙 정렬 */
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* 기본 버튼 스타일 */
+.btn {
+    display: inline-block; /* 버튼처럼 보이도록 inline-block으로 설정 */
+    padding: 10px 20px;
+    background-color: #363636; /* 어두운 색 */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none; /* 링크 기본 스타일 제거 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    font-size: 14px;
+}
+
+/* 버튼 호버 시 색상 변화 */
+.btn:hover {
+    background-color: #555; /* hover시 어두운색 */
+}
+
+.btn-area {
+    text-align: center; /* 내부 버튼을 중앙 정렬 */
+    margin: 8px 0px 60px 0px; /* 위쪽 여백 추가 */
+}
+
+
+.estimate-detail .btn-edit,
+.estimate-detail .btn-delete,
+.estimate-detail .btn-list {
+    background-color: #363636; /* 버튼 색을 어두운색으로 통일 */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none; /* 링크 밑줄 제거 */
+    display: inline-block; /* 버튼을 인라인 블록으로 만들기 */
+}
+
+/* **버튼 그룹** */
+.btn-group {
+    margin: 20px 0px 60px 0px;
+    gap: 10px;
+    display: flex;
+    justify-content: flex-start; /* 기본적으로 왼쪽 정렬 */
+    
+}
+
+/* **삭제 버튼 오른쪽 정렬** */
+.btn-group .btn-delete {
+    margin-left: auto; /* 오른쪽 정렬 */
+}

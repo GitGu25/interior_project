@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <title>시공 후기 게시판</title>
     <link rel="stylesheet" href="/css/review.css" />
+	<link rel="stylesheet" href="/css/pagination.css">
+	
 </head>
 <body>
     <div th:replace="layout/header"></div>
     <div th:replace="layout/imagebanner"></div>
     <div class="container">
-        <h2 class="board-title">시공 후기 게시판</h2>
-        <div class="write-review-btn">
+        <h2 class="board-title">고객 후기 게시판</h2>
+        <div class="btn-right">
         	<a href="/review/write" class="btn">리뷰 작성하기</a>
         </div>
         <!-- 후기 리스트 -->
@@ -18,31 +20,44 @@
 		    <div th:if="${#lists.isEmpty(reviews)}">
 		        <p>리뷰가 없습니다.</p>
 		    </div>
-		    <div class="review-item" th:each="review : ${reviews}">
-		    <div class="review-content">
-			        <!-- 제목을 클릭하면 상세 페이지로 이동 -->
-			        <h3>
-			            <a th:href="@{/review/view/{id}(id=${review.ireviewId})}" 
-			               th:text="${review.ireviewTitle}" class="review-title">
-			            </a>
-			        </h3>
-			        
-			        <p class="review-meta">
-			            <span th:text="${review.ireviewName}"></span> · 
-			            <span th:text="${review.ireviewCreatedAt}"></span>
-			        </p>
-			        <p class="review-text" th:text="${review.ireviewText}"></p>
+			<div class="review-item" th:each="review : ${reviews}">
+			    <div class="review-inner">
+			        <!-- 왼쪽: 텍스트 콘텐츠 -->
+			        <div class="review-content">
+			            <h3>
+			                <a th:href="@{/review/view/{id}(id=${review.ireviewId})}" 
+			                   th:text="${review.ireviewTitle}" class="review-title">
+			                </a>
+			            </h3>
+						<!-- ✅ 시공 항목 출력 부분 -->
+						<p class="review-types" th:if="${review.ireviewTypes != null}"
+						   th:text="${#strings.replace(review.ireviewTypes, ',', ' | ')}"></p>
+
+						<p class="review-text" th:text="${review.ireviewText}"></p>
+			            <p class="review-meta">
+			                <span th:text="${review.ireviewName}"></span> 고객님 · 
+			                <span th:text="${review.ireviewCreatedAt}"></span>
+			            </p>
+			        </div>
+
+					<!-- 오른쪽: 대표 이미지 -->
+					<div class="review-thumbnail" th:if="${review.thumbUrl != null}">
+					    <a th:href="@{/review/view/{id}(id=${review.ireviewId})}">
+					        <img th:src="@{${review.thumbUrl}}" alt="썸네일 이미지"/>
+					    </a>
+					</div>
+
 			    </div>
 			</div>
 		</div>
 
-        <!-- 페이지네이션 -->
-		<div class="pagination">
-		    <!-- 이전 페이지 링크 -->
+		<!-- 페이지네이션 (리뷰가 있을 때만 표시) -->
+		<div class="pagination" th:if="${not #lists.isEmpty(reviews)}">
+		    <!-- 이전 페이지 -->
 		    <a th:href="@{/review/list(page=${currentPage - 1}, size=${size})}" class="prev" 
 		       th:if="${currentPage > 1}">&lt; 이전</a>
-		    
-		    <!-- 페이지 번호 링크 (전체 페이지 수만큼 반복) -->
+
+		    <!-- 페이지 번호 -->
 		    <span class="page-numbers">
 		        <a th:each="page : ${#numbers.sequence(1, totalPages)}" 
 		           th:href="@{/review/list(page=${page}, size=${size})}" 
@@ -50,11 +65,12 @@
 		           th:classappend="${currentPage == page} ? 'active'">   
 		        </a>
 		    </span>
-		    
-		    <!-- 다음 페이지 링크 -->
+
+		    <!-- 다음 페이지 -->
 		    <a th:href="@{/review/list(page=${currentPage + 1}, size=${size})}" class="next" 
 		       th:if="${currentPage < totalPages}">다음 &gt;</a>
 		</div>
+
 
         <br>
     </div>

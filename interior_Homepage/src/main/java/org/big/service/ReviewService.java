@@ -23,4 +23,8 @@ public interface ReviewService {
 
 	// ✅ 리뷰 + 사진 업로드 묶어서 저장
 	void reviewBundle(ReviewDto reviewDto) throws Exception;
+
+	List<ReviewDto> getLatestReviews();
+
+	void updateRBundle(ReviewDto reviewDto, List<Long> deletePhotoIds) throws Exception;
 }
