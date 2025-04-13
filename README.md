@@ -60,6 +60,7 @@ ALTER TABLE in_photos ADD CONSTRAINT uq_iphoto_filename UNIQUE (iphoto_filename)
 
 CREATE SEQUENCE in_reviews_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
 
+CREATE SEQUENCE in_projects_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE; -- 추가함!!!!!!!!!!!!!!!!!!!
 ALTER TABLE in_reviews ADD ireview_types VARCHAR2(255); --추가함!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ALTER TABLE in_projects RENAME COLUMN iproject_description TO iproject_text; --추가함!!!!!!!!!!!!!!!!!!!!!!!!!!!!22
 
