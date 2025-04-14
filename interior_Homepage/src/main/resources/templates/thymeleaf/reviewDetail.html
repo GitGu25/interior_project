@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>리뷰 상세 화면</title>
     <link rel="stylesheet" href="/css/review.css" />
+	<link rel="stylesheet" href="/css/p_r_detail.css" />
 </head>
 <body>
     <div th:replace="layout/header"></div>
@@ -14,7 +15,7 @@
         
         <!-- 폼 시작 -->
         <form id="frm" method="post">
-            <table class="review-detail">
+            <table class="detail-review">
                 <colgroup>
                     <col width="*">
                     <col width="24%">
@@ -30,19 +31,19 @@
                     <tr>
                         <th scope="row">제목</th>
                         <td colspan="3">
-                            <input type="text" id="ireviewTitle" name="ireviewTitle" class="input-title" th:value="${review.ireviewTitle}">
+                            <input type="text" id="ireviewTitle" name="ireviewTitle" class="detail-input-title" th:value="${review.ireviewTitle}">
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" class="view-text">
-                            <textarea title="내용" id="ireviewText" name="ireviewText" class="textarea-content" th:text="${review.ireviewText}"></textarea>
+                        <td colspan="4" class="detail-view-text">
+                            <textarea title="내용" id="ireviewText" name="ireviewText" class="detail-textarea-content" th:text="${review.ireviewText}"></textarea>
                         </td>
                     </tr>
                     <tr>
-					    <td colspan="4" class="review-detail-images">
-					        <div class="image-gallery">
+					    <td colspan="4" class="detail-images">
+					        <div class="detail-image-gallery">
 					            <div th:each="photo : ${review.photos}">
-					                <img th:src="${photo.imageUrl}" alt="첨부 이미지" class="review-image">
+					                <img th:src="${photo.imageUrl}" alt="첨부 이미지" class="detail-image">
 					            	<p th:text="${photo.imageUrl}"></p> <!-- 디버깅용 출력 (원하면 지워도 됩니다) -->
 					            </div>
 					        </div>
@@ -57,12 +58,11 @@
         </form>
         
         <!-- 버튼 그룹 -->
-		<div class="button-group">
+		<div class="detail-button-group">
 		    <a href="/review/list" id="list" class="btn btn-list">목록으로</a>
 		    <a th:href="@{/review/update/{ireviewId}(ireviewId=${review.ireviewId})}" class="btn btn-edit">수정하기</a>
 		    <a href="#this" id="delete" class="btn btn-delete">삭제하기</a>
 		</div>
-
 
         <!-- jQuery 사용 -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -75,7 +75,6 @@
 		            location.href = "/review/list";  // 목록 페이지로 이동
 		        });
 		
-				
 				// 삭제하기
 				$("#delete").on("click", function(){
 					var frm = $("#frm")[0];

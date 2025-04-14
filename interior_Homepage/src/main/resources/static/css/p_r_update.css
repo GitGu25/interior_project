@@ -1,0 +1,94 @@
+/* review-detail.css */
+
+/* 제목 */
+.board-title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* 폼 그룹 */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #3a9ad9;
+  outline: none;
+}
+
+/* 버튼 그룹 */
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.btn-group a,
+.form-group button,
+.btn {
+  padding: 10px 20px;
+  background-color: #363636;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+}
+
+.btn-group a:hover,
+.form-group button:hover,
+.btn:hover {
+  background-color: #555;
+}
+
+/* 삭제 버튼 */
+.delete-btn {
+  margin-left: auto;
+  background-color: #d9534f;
+}
+
+.delete-btn:hover {
+  background-color: #c9302c;
+}
+
+/* 썸네일 이미지 스타일 */
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.image-wrapper {
+  margin-top: 32px;
+  position: relative;
+  width: 150px;
+}
+
+.detail-images {
+  width: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}

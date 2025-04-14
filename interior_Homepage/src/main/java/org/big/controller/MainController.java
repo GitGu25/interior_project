@@ -43,7 +43,7 @@ public class MainController {
 
     @GetMapping("/projects")
     public String redirectToProjects() {
-        return "redirect:/projects/list"; // 프로젝트 목록을 처리하는 컨트롤러로 리다이렉트
+        return "redirect:/project/list"; // 프로젝트 목록을 처리하는 컨트롤러로 리다이렉트
     }
     
     @GetMapping("/estimate")

@@ -191,19 +191,6 @@ a.review-title {
   }
 }
 
-/* 리뷰 테이블 스타일 */
-.review-detail {
-  width: 100%;
-  margin-bottom: 20px;
-  border-collapse: collapse;
-}
-
-.review-detail th, .review-detail td {
-  padding: 10px;
-  border: 1px solid #ccc;
-  text-align: left;
-}
-
 /* 리뷰 작성 폼 스타일 */
 .input-title, .textarea-content {
   width: 99%;
@@ -217,32 +204,6 @@ a.review-title {
 .textarea-content {
   height: 200px;
   resize: vertical;
-}
-
-/* 리뷰 이미지 갤러리 스타일 */
-.review-image {
-  max-width: 400px;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.image-gallery {
-	display: flex;
-	 flex-wrap: nowrap;  /* 오른쪽으로 쭉 나열되게 함 */
-	 overflow-x: auto;
-  gap: 10px;
-}
-
-.review-detail-images {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  object-fit: cover;
 }
 
 /* 버튼 그룹 스타일 */

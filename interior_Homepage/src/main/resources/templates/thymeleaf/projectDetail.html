@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>시공 사례 상세</title>
+    <link rel="stylesheet" href="/css/project.css" />
+    <link rel="stylesheet" href="/css/p_r_detail.css" />
+</head>
+<body>
+    <div th:replace="layout/header"></div>
+    
+    <div class="container">
+        <div th:replace="layout/imagebanner"></div>
+        <h2 class="detail-board-title">시공 사례 상세화면</h2>
+        
+        <!-- 폼 시작 -->
+        <form id="frm" method="post">
+            <table class="detail-project">
+                <colgroup>
+                    <col width="*">
+                    <col width="24%">
+                    <col width="20%">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th scope="row">작성자</th>
+                        <td th:text="${project.iprojectName}">홍길동</td>
+                        <th scope="row">작성일</th>
+                        <td th:text="${project.iprojectCreatedAt}">2025-04-13</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">제목</th>
+                        <td colspan="3">
+                            <input type="text" id="iprojectTitle" name="iprojectTitle" class="detail-input-title" th:value="${project.iprojectTitle}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="detail-view-text">
+                            <textarea title="내용" id="iprojectText" name="iprojectText" class="detail-textarea-content" th:text="${project.iprojectText}"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="detail-images">
+                            <div class="detail-image-gallery">
+                                <div th:each="photo : ${project.photos}">
+                                    <img th:src="${photo.imageUrl}" alt="시공 이미지" class="detail-image">
+									<p th:text="${photo.imageUrl}"></p> <!-- 디버깅용 출력 (원하면 지워도 됩니다) -->
+								</div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- hidden으로 ID 전달 -->
+            <input type="hidden" id="iprojectId" name="iprojectId" th:value="${project.iprojectId}">
+        </form>
+        
+        <!-- 버튼 그룹 -->
+        <div class="detail-button-group">
+            <a href="/project/list" id="list" class="btn btn-list">목록으로</a>
+            <a th:href="@{/project/update/{iprojectId}(iprojectId=${project.iprojectId})}" class="btn btn-edit">수정하기</a>
+            <a href="#this" id="delete" class="btn btn-delete">삭제하기</a>
+        </div>
+
+        <!-- jQuery 사용 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var iprojectId = $("#iprojectId").val();
+
+                // 목록으로 이동
+                $("#list").on("click", function(){
+                    location.href = "/project/list";  // 목록 페이지로 이동
+                });
+
+                // 삭제하기
+                $("#delete").on("click", function(){
+                    var frm = $("#frm")[0];
+                    frm.action = "/project/delete";  // 삭제 처리 URL
+                    frm.submit();
+                });
+            });
+        </script>
+    </div>
+    
+    <div th:replace="layout/footer"></div>
+</body>
+</html>

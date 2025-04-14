@@ -3,8 +3,6 @@ package org.big.service;
 import java.util.List;
 
 import org.big.dto.ReviewDto;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface ReviewService {
 

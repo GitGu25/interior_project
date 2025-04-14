@@ -1,0 +1,104 @@
+/* 리뷰 상세 테이블 스타일 */
+.detail-review, .detail-project {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.detail-review th, .detail-review td, .detail-project th, .detail-project td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+/* 리뷰 작성 폼 스타일 */
+.detail-input-title, .detail-textarea-content {
+  width: 99%;
+  padding: 24px 0px 24px 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 32px;
+}
+
+.detail-textarea-content {
+  height: 200px;
+  resize: vertical;
+}
+
+/* 리뷰 이미지 갤러리 스타일 */
+.detail-image {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detail-image-gallery {
+  display: flex;
+  flex-wrap: nowrap;  /* 오른쪽으로 쭉 나열되게 함 */
+  overflow-x: auto;
+  gap: 10px;
+}
+
+.detail-images {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+/* 버튼 그룹 스타일 */
+.detail-button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 삭제 버튼 스타일 */
+#delete {
+  margin-left: auto;
+  background-color: #d9534f;
+}
+
+#delete:hover {
+  background-color: #c9302c;
+}
+
+/* 리뷰 수정 페이지 스타일 */
+.board-title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* 썸네일 이미지 스타일 */
+.detail-review-thumbnail img {
+  width: 360px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 리뷰 이미지 갤러리 스타일 */
+.detail-review-image {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detail-image-gallery {
+  display: flex;
+  flex-wrap: nowrap;  /* 오른쪽으로 쭉 나열되게 함 */
+  overflow-x: auto;
+  gap: 10px;
+}

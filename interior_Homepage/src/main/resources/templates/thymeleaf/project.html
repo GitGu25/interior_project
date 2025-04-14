@@ -3,47 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>시공 사례</title>
-    <link rel="stylesheet" href="/css/review.css" />
-	<link rel="stylesheet" href="/css/pagination.css">
-	
+    <link rel="stylesheet" href="/css/project.css" />
+    <link rel="stylesheet" href="/css/pagination.css">
 </head>
 <body>
     <div th:replace="layout/header"></div>
-	<div th:replace="layout/imagebanner"></div>
-	<h3 class="board-title">시공 사례</h3>
+    <div th:replace="layout/imagebanner"></div>
     <div class="container">
-        <!-- 시공 사례 목록 -->
-        <div class="gallery-container">
-            <div class="gallery-item" th:each="project : ${projects}">
-                <a th:href="@{/projects/view/{id}(id=${project.id})}">
-                    <img th:src="${project.imageUrl}" alt="시공 이미지">
-                </a>
-                <p th:text="${project.title}"></p>
-            </div>
+        <h2 class="board-title">시공 사례</h2>
+        <div class="btn-right">
+            <a href="/project/write" class="btn">작성하기</a>
         </div>
+        <!-- 시공 사례 리스트 -->
+		<div class="project-grid">
+		    <div th:if="${#lists.isEmpty(projects)}">
+		        <p>등록된 시공 사례가 없습니다.</p>
+		    </div>
+			<div class="project-card" th:each="project : ${projects}">
+			    <a th:href="@{/project/view/{id}(id=${project.iprojectId})}">
+			        <div class="project-thumb" th:if="${project.thumbUrl != null}">
+			            <img th:src="@{${project.thumbUrl}}" alt="시공 이미지"/>
+			        </div>
+			        <h3 class="project-title" th:text="${project.iprojectTitle}"></h3>
+			    </a>
+			</div>
+		</div>
 
-        <!-- 페이지네이션 -->
-		<div class="pagination">
-		    <!-- 이전 페이지 링크 -->
-		    <a th:href="@{/projects/list(page=${currentPage - 1}, size=${size})}" class="prev" 
+        <!-- 페이지네이션 (리스트가 있을 때만 표시) -->
+		<div class="pagination" th:if="${not #lists.isEmpty(projects)}">
+		    <!-- 이전 페이지 -->
+		    <a th:href="@{/project/list(page=${currentPage - 1}, size=${size})}" class="prev" 
 		       th:if="${currentPage > 1}">&lt; 이전</a>
-		
+
 		    <!-- 페이지 번호 -->
 		    <span class="page-numbers">
-		        <a th:each="page : ${#numbers.sequence(1, totalPages)}" 
-		           th:href="@{/projects/list(page=${page}, size=${size})}" 
+		        <a th:each="page : ${#numbers.sequence(1, totalPages)}"
+		           th:href="@{/project/list(page=${page}, size=${size})}" 
 		           th:text="${page}" 
-		           th:classappend="${currentPage == page} ? 'active'"></a>
+		           th:classappend="${currentPage == page} ? 'active'">
+		        </a>
 		    </span>
-		
-		    <!-- 다음 페이지 링크 -->
-		    <a th:href="@{/projects/list(page=${currentPage + 1}, size=${size})}" class="next" 
+
+		    <!-- 다음 페이지 -->
+		    <a th:href="@{/project/list(page=${currentPage + 1}, size=${size})}" class="next" 
 		       th:if="${currentPage < totalPages}">다음 &gt;</a>
 		</div>
+
+        <br>
     </div>
 
-	<br>
-	<br>
     <div th:replace="layout/footer"></div>
 </body>
 </html>

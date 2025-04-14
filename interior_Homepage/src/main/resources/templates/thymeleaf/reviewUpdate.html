@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>리뷰 수정</title>
     <link rel="stylesheet" href="/css/review.css" />
+	<link rel="stylesheet" href="/css/p_r_update.css" />
 </head>
 <body>
 <div th:replace="layout/header"></div>
@@ -42,7 +43,7 @@
 			<!-- 기존 이미지 영역 -->
 			<div id="existingImageContainer" class="image-gallery">
 			    <div th:each="photo : ${photoList}" class="image-wrapper" style="position: relative;">
-			        <img th:src="@{'/uploads/' + ${photo.iphotoFilename}}" class="review-detail-images" />
+			        <img th:src="@{'/uploads/' + ${photo.iphotoFilename}}" class="detail-images" />
 			        
 			        <!-- 삭제 버튼 클릭 시 해당 이미지의 ID를 전송 -->
 					<button type="button" class="btn delete-btn" 
@@ -51,8 +52,6 @@
 					        style="position: absolute; top: 5px; right: 5px;">
 					    삭제
 					</button>
-
-
 			    </div>
 			</div>
 
@@ -61,7 +60,6 @@
 		    <div id="newImagePreviewContainer" class="image-gallery"></div>
 		</div>
 
-		
 		<!-- 시공 항목 체크박스 -->
 		    <div class="review-types">
 		      <label><input type="checkbox" name="ireviewTypes" value="도배" th:checked="${#lists.contains(selectedTypes, '도배')}"> 도배</label>
@@ -73,8 +71,6 @@
 		      <label><input type="checkbox" name="ireviewTypes" value="수리" th:checked="${#lists.contains(selectedTypes, '수리')}"> 수리</label>
 		      <label><input type="checkbox" name="ireviewTypes" value="철거" th:checked="${#lists.contains(selectedTypes, '철거')}"> 철거</label>
 		    </div>
-
-		
 			
         <!-- 저장 버튼 -->
         <div class="form-group">
@@ -115,7 +111,7 @@
 
                 const img = document.createElement('img');
                 img.src = e.target.result;
-                img.className = 'review-detail-images';
+                img.className = 'detail-images';
 
                 const delBtn = document.createElement('button');
                 delBtn.innerText = '삭제';

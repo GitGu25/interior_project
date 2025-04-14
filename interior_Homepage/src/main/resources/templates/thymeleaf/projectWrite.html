@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>시공사례 작성</title>
+    <link rel="stylesheet" href="/css/project.css" />
+</head>
+<body>
+    <div th:replace="layout/header"></div>
+
+    <div class="container">
+        <h3>시공사례 작성</h3>
+
+        <!-- 시공사례 작성 폼 -->
+        <form th:action="@{/project/write}" method="post" enctype="multipart/form-data" id="projectForm">
+            <div class="form-group">
+                <label for="projectName">작성자 이름</label>
+                <input type="text" id="projectName" name="iprojectName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="projectTitle">제목</label>
+                <input type="text" id="projectTitle" name="iprojectTitle" required>
+            </div>
+
+            <div class="form-group">
+                <label for="projectText">내용</label>
+                <textarea id="projectText" name="iprojectText" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="photos">이미지 첨부</label>
+                <input type="file" name="uploadFiles" multiple id="photos">
+            </div>
+
+            <!-- 이미지 미리보기 영역 -->
+            <div id="preview" style="display: flex; flex-wrap: wrap;"></div>
+
+            <button type="submit">시공사례 작성</button>
+        </form>
+    </div>
+
+    <div th:replace="layout/footer"></div>
+
+	<script>
+	    document.getElementById('projectForm').addEventListener('submit', function(event) {
+	        // 기존 파일 미리보기 이미지 처리 코드
+	        const fileInput = document.getElementById('photos');
+	        const dataTransfer = new DataTransfer();
+
+	        // 기존 선택된 파일들을 input에 덧붙이기
+	        selectedFiles.forEach(file => {
+	            dataTransfer.items.add(file);
+	        });
+
+	        // 수정된 파일 목록을 input에 설정
+	        fileInput.files = dataTransfer.files;
+	    });
+
+	    // 기존 파일 미리보기 및 삭제 기능 처리
+	    let selectedFiles = [];  // 선택된 파일들을 저장하는 배열
+
+	    document.getElementById('photos').addEventListener('change', function(event) {
+	        const preview = document.getElementById('preview');
+	        preview.innerHTML = ''; // 기존 미리보기 이미지 초기화
+
+	        // 기존 선택된 파일과 새로 선택된 파일을 합쳐서 배열에 넣기
+	        const allFiles = [...selectedFiles, ...Array.from(event.target.files)];
+	        selectedFiles = allFiles;  // 새로 갱신된 파일 목록 저장
+
+	        // 새로 선택한 파일들만 미리보기로 추가
+	        allFiles.forEach((file) => {
+	            const reader = new FileReader();
+	            reader.onload = function(e) {
+	                const imgContainer = document.createElement('div');
+	                imgContainer.style.margin = '5px';
+	                imgContainer.style.position = 'relative';
+
+	                const img = document.createElement('img');
+	                img.src = e.target.result;
+	                img.style.width = '150px';
+	                img.style.borderRadius = '8px';
+
+	                // 삭제 버튼 생성
+	                const deleteBtn = document.createElement('button');
+	                deleteBtn.textContent = '삭제';
+	                deleteBtn.style.position = 'absolute';
+	                deleteBtn.style.top = '5px';
+	                deleteBtn.style.right = '5px';
+	                deleteBtn.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
+	                deleteBtn.style.color = 'white';
+	                deleteBtn.style.border = 'none';
+	                deleteBtn.style.padding = '5px';
+	                deleteBtn.style.cursor = 'pointer';
+
+	                // 삭제 버튼 클릭 시 해당 이미지 제거
+	                deleteBtn.addEventListener('click', function() {
+	                    // 선택된 파일 배열에서 삭제
+	                    const index = selectedFiles.indexOf(file);
+	                    if (index > -1) {
+	                        selectedFiles.splice(index, 1);
+	                    }
+	                    imgContainer.remove();  // 미리보기에서 해당 이미지 제거
+	                });
+
+	                // 이미지와 삭제 버튼을 imgContainer에 추가
+	                imgContainer.appendChild(img);
+	                imgContainer.appendChild(deleteBtn);
+
+	                // 미리보기 영역에 추가
+	                preview.appendChild(imgContainer);
+	            };
+	            reader.readAsDataURL(file);
+	        });
+	    });
+	</script>
+
+</body>
+</html>
