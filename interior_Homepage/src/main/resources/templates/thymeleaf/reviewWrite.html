@@ -53,7 +53,7 @@
             <!-- 이미지 미리보기 영역 -->
             <div id="preview" style="display: flex; flex-wrap: wrap;"></div>
 
-            <button type="submit">리뷰 작성</button>
+            <button type="submit" class = "btn">리뷰 작성</button>
         </form>
     </div>
 
@@ -110,15 +110,12 @@
 	                // 삭제 버튼 생성
 	                const deleteBtn = document.createElement('button');
 	                deleteBtn.textContent = '삭제';
+	                deleteBtn.className = 'btn';
 	                deleteBtn.style.position = 'absolute';
 	                deleteBtn.style.top = '5px';
 	                deleteBtn.style.right = '5px';
-	                deleteBtn.style.backgroundColor = 'rgba(255, 0, 0, 0.7)';
-	                deleteBtn.style.color = 'white';
-	                deleteBtn.style.border = 'none';
-	                deleteBtn.style.padding = '5px';
-	                deleteBtn.style.cursor = 'pointer';
-
+	                deleteBtn.style.fontSize = '12px';
+	                
 	                // 삭제 버튼 클릭 시 해당 이미지 제거
 	                deleteBtn.addEventListener('click', function() {
 	                    // 선택된 파일 배열에서 삭제

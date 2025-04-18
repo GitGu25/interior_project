@@ -80,6 +80,7 @@
         WHERE ireview_id = #{ireviewId}
     </delete>
 
+	<!-- 리뷰 3개 가져오기 -->
 	<select id="selectLatestReviews" resultType="org.big.dto.ReviewDto">
 	    <![CDATA[
 	        SELECT
@@ -88,12 +89,9 @@
 	            ireview_text AS ireviewText,
 	            ireview_types AS ireviewTypes,
 	            ireview_created_at AS ireviewCreatedAt
-	        FROM (
-	            SELECT * FROM in_reviews ORDER BY ireview_id DESC
-	        )
-	        WHERE ROWNUM <= 3
+	        FROM in_reviews
+	        ORDER BY ireview_id DESC
+	        FETCH FIRST 3 ROWS ONLY
 	    ]]>
 	</select>
-
-
 </mapper>

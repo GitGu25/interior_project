@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>인테리어 홈페이지</title>
-<link rel="stylesheet" type="text/css" href="/css/header_footer_index.css">
+<link rel="stylesheet" type="text/css" href="/css/header_footer.css">
+<link rel="stylesheet" type="text/css" href="/css/index.css">
 </head>
 <body>
 	<div th:replace="layout/header"></div>
@@ -19,13 +20,12 @@
 	    
 		<div class="index_review">
 		    <h3 class="index-review-title">최신 고객 후기</h3>
-
 		    <div class="index-review-list">
 		        <div class="index-review-box" th:each="review : ${latestReviews}">
-					<!-- 도배,장판 -> 도배 | 장판 으로 출력 -->
-					<div class="index-review-types" 
-					     th:text="${#strings.replace(review.ireviewTypes, ',', ' | ')}"></div>
-						 
+		            <!-- 도배,장판 -> 도배 | 장판 으로 출력 -->
+		            <div class="index-review-types" 
+		                 th:text="${#strings.replace(review.ireviewTypes, ',', ' | ')}"></div>
+		                 
 		            <div class="index-review-text" th:text="${#strings.abbreviate(review.ireviewText, 50)}">후기 내용 일부</div>
 		            <div class="index-review-info">
 		                <span th:text="${review.ireviewName}">작성자</span> |
@@ -34,13 +34,24 @@
 		        </div>
 		    </div>
 		</div>
+		
+		<!-- ✅ 시공 사례는 리뷰 바깥에 따로 구성 -->
+		<div class="index_project">
+		    <h3 class="index-project-title">시공 사례</h3>
+		    <div class="index-project-list">
+		        <div class="index-project-box" th:each="project : ${latestprojects}">
+		            <a th:href="@{/project/view/{id}(id=${project.iprojectId})}">
+		                <div class="index-project-thumb" th:if="${project.thumbUrl != null}">
+		                    <img th:src="@{'/uploads/' + ${project.thumbUrl}}" alt="시공 이미지" />
 
+		                </div>
+		                <h3 class="index-project-item-title" th:text="${project.iprojectTitle}"></h3>
+		            </a>
+		        </div>
+		    </div>
+		</div>
 
 	    
-	    <div class="index_project">
-	    	<h3>시공 사례</h3>
-	    </div>
-		
 		<div class="estimateGo">
 			<div th:replace="layout/estimate-button"></div>
 		</div>

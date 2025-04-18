@@ -33,7 +33,7 @@ public class ProjectController {
 			Model model) {
 		try {
 			List<ProjectDto> projects = projectService.getProjects(page, size);
-
+			
 			// 총 페이지 수를 계산하는 서비스 메소드
 			int totalPages = projectService.getTotalPages(size);
 

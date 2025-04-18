@@ -75,15 +75,23 @@
         WHERE iproject_id = #{iprojectId}
     </delete>
 
+	<!-- 시공 사례 2개 가져오기 (이미지 1개 서브쿼리로 가져오기) -->
 	<select id="selectLatestProjects" resultType="org.big.dto.ProjectDto">
 	    SELECT 
-	        iproject_id AS iprojectId,
-	        iproject_name AS iprojectName,
-	        iproject_title AS iprojectTitle,
-	        iproject_text AS iprojectText,
-	        iproject_created_at AS iprojectCreatedAt
-	    FROM in_projects
-	    ORDER BY iproject_id DESC
+	        p.iproject_id AS iprojectId,
+	        p.iproject_name AS iprojectName,
+	        p.iproject_title AS iprojectTitle,
+	        p.iproject_text AS iprojectText,
+	        p.iproject_created_at AS iprojectCreatedAt,
+	        (
+	            SELECT iphoto_filename
+	            FROM in_photos
+	            WHERE iphoto_project_id = p.iproject_id
+	            ORDER BY iphoto_id ASC
+	            FETCH FIRST 1 ROWS ONLY
+	        ) AS thumbUrl
+	    FROM in_projects p
+	    ORDER BY p.iproject_id DESC
 	    FETCH FIRST 2 ROWS ONLY
 	</select>
 

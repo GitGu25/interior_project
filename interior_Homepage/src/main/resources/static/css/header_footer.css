@@ -46,6 +46,7 @@ a {
 	    margin: 0;
 	    display: flex;  /* 가로 정렬 */
 	    flex-wrap: nowrap; /* 줄 바꿈 방지 */
+	    z-index: 1;
 	}
 	
 	/* 네비게이션 아이템 */
@@ -83,6 +84,7 @@ a {
 	    background: none;
 	    border: none;
 	    color: #2C3673;
+	    z-index: 2;
 	}
 	
 	/* 헤더 반응형: 화면이 768px 이하일 때 */
@@ -176,130 +178,5 @@ a {
 	    .footer-left, .footer-right {
 	        width: 100%;  /* 한 줄로 전체 너비 차지 */
 	        align-items: flex-start; /* 작은 화면에서도 왼쪽 정렬 유지 */
-	    }
-	}
-
-	
-	.index_service-list {
-    	width: 100%;
-	    height: 400px;
-	    display: flex;
-	    justify-content: center;
-	    align-items: center;
-	    text-align: center;
-	    font-size: 36px;
-	    line-height: 1.5;
-	    background-color: #fff; /* 배경색은 필요에 맞게 수정 */
-	}
-	
-	.index_review {
-    	width: 100%;
-	    height: 480px;
-	    display: flex;
-	    justify-content: center;
-	    align-items: flex-start;
-	    font-size: 32px;
-	    background-color: #F1F1F1;
-		padding-top: 48px; /* 위쪽 간격을 48px로 설정 */
-	}
-	
-	.index_project {
-    	width: 100%;
-	    height: 704px;
-	    display: flex;
-	    justify-content: center;
-	    align-items: flex-start;
-	    font-size: 32px;
-	    background-color: #fff;
-		padding-top: 48px; /* 위쪽 간격을 48px로 설정 */
-	}
-
-	.estimateGo {
-    	width: 100%;
-	    height: 424px;
-	    display: flex;
-	    justify-content: center;
-	    align-items: center;
-	    text-align: center;
-	    background-color: #fff;
-		padding-top: 48px; /* 위쪽 간격을 48px로 설정 */
-	}
-	
-	/* 전체 후기 영역 */
-	.index_review {
-	    display: flex;
-	    flex-direction: column;
-	    align-items: center; /* 제목과 박스를 가운데 정렬 */
-	}
-
-	/* 제목은 위쪽에 자연스럽게 위치 */
-	.index-review-title {
-	    margin-bottom: 40px;
-	}
-
-	/* 리뷰 목록은 아래쪽에서 가로 정렬 */
-	.index-review-list {
-	    display: flex;
-	    justify-content: center;
-	    flex-wrap: wrap;
-	    gap: 48px;
-	}
-
-	/* 각 리뷰 박스 */
-	.index-review-box {
-	    width: 400px;
-	    height: 280px;
-	    border: 1px solid #ddd;
-	    padding: 20px;
-	    border-radius: 12px;
-	    background-color: #fdfdfd;
-	    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.05);
-	    display: flex;
-	    flex-direction: column;
-	    justify-content: space-between;
-	    transition: transform 0.2s ease, box-shadow 0.2s ease;
-	}
-
-	.index-review-box:hover {
-	    transform: translateY(-6px);
-	    box-shadow: 4px 8px 12px rgba(0, 0, 0, 0.1);
-	}
-
-	.index-review-types {
-	    font-weight: lighter;
-		font-size: 24px;
-	    margin: 12px 12px 0px 12px;
-	}
-
-	.index-review-text {
-	    flex-grow: 1;
-	    color: #444;
-		font-size: 24px;
-	    line-height: 1.4;
-	    margin: 32px;
-	    overflow: hidden;
-	    text-overflow: ellipsis;
-	}
-
-	.index-review-info {
-	    font-size: 20px;
-	    color: #888;
-	    text-align: right;
-	}
-
-	/* 중간 화면에서의 스타일 */
-	@media screen and (max-width: 1024px) {
-	    .index-review-box {
-	        width: 320px; /* 화면이 작을 때 크기 조정 */
-	        height: 230px; /* 화면에 맞는 높이 조정 */
-	    }
-	}
-
-	/* 작은 화면 (모바일)에서의 스타일 */
-	@media screen and (max-width: 768px) {
-	    .index-review-box {
-	        width: 100%; /* 화면에 맞춰 전체 폭 사용 */
-	        height: auto; /* 높이는 자동으로 조정 */
-	        padding: 12px; /* 여백을 조금 줄임 */
 	    }
 	}

@@ -36,7 +36,7 @@
 						<p class="review-text" th:text="${review.ireviewText}"></p>
 			            <p class="review-meta">
 			                <span th:text="${review.ireviewName}"></span> 고객님 · 
-			                <span th:text="${review.ireviewCreatedAt}"></span>
+			                <span th:text="${review.ireviewCreatedAt != null ? #temporals.format(review.ireviewCreatedAt, 'yyyy-MM-dd HH:mm:ss') : '-'}"></span>
 			            </p>
 			        </div>
 

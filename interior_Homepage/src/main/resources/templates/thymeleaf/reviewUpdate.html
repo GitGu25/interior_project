@@ -82,6 +82,7 @@
 <script>
     let selectedFiles = [];
 
+	//기존 이미지 삭제 기능
     function removeExistingImage(btn) {
         const photoId = btn.getAttribute('data-photo-id');
         const wrapper = btn.closest('.image-wrapper');
@@ -95,12 +96,13 @@
         }
     }
 
+	//새로 추가한 이미지 미리보기 기능
     function previewImages(event) {
         const container = document.getElementById('newImagePreviewContainer');
         const files = event.target.files;
 
         Array.from(files).forEach(file => {
-            selectedFiles.push(file); // 🔥 추가한 파일 저장
+            selectedFiles.push(file); // 추가한 파일 저장
 
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -124,7 +126,7 @@
                 delBtn.onclick = () => {
                     const index = selectedFiles.indexOf(file);
                     if (index > -1) {
-                        selectedFiles.splice(index, 1); // 🔥 배열에서도 삭제
+                        selectedFiles.splice(index, 1); // 배열에서도 삭제
                     }
                     wrapper.remove();
                 };
@@ -140,6 +142,7 @@
         event.target.value = '';
     }
 
+	//체크박스 유효성 검사
     function validateForm() {
         const checkboxes = document.querySelectorAll('input[name="ireviewTypes"]:checked');
         if (checkboxes.length === 0) {
@@ -149,23 +152,24 @@
         return true;
     }
 
+	//폼 제출
     function handleSubmit(event) {
         if (!validateForm()) {
             event.preventDefault();
             return false;
         }
 
-        // 🔥 기본 제출 막고 수동으로 FormData 전송
+        // 기본 폼 제출 대신 수동으로 FormData 객체 생성 후 전송
         event.preventDefault();
         const form = document.getElementById("reviewForm");
         const formData = new FormData(form);
 
-        // 🔥 선택한 파일들 모두 추가
+        // 선택한 파일들 모두 추가
         selectedFiles.forEach(file => {
             formData.append("uploadFiles", file);
         });
 
-        // 🔥 fetch로 전송
+        // fetch로 전송(새로고침하지 않고 요청 보내기 가능)
         fetch(form.action, {
             method: "POST",
             body: formData

@@ -22,7 +22,7 @@
 			<div class="project-card" th:each="project : ${projects}">
 			    <a th:href="@{/project/view/{id}(id=${project.iprojectId})}">
 			        <div class="project-thumb" th:if="${project.thumbUrl != null}">
-			            <img th:src="@{${project.thumbUrl}}" alt="시공 이미지"/>
+			            <img th:src="@{${project.thumbUrl}}" alt="시공 이미지" />
 			        </div>
 			        <h3 class="project-title" th:text="${project.iprojectTitle}"></h3>
 			    </a>
