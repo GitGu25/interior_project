@@ -71,7 +71,7 @@ RENAME COLUMN iesti_password TO iesti_phone;
 ALTER TABLE in_estimate  --추가함!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 MODIFY iesti_phone VARCHAR2(20) NOT NULL;
 
-
+ALTER TABLE in_reviews RENAME COLUMN ireview_password TO ireview_phone; --추가함!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 select * from in_estimate;
 
