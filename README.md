@@ -60,10 +60,18 @@ ALTER TABLE in_photos ADD CONSTRAINT uq_iphoto_filename UNIQUE (iphoto_filename)
 
 CREATE SEQUENCE in_reviews_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
 
-CREATE SEQUENCE in_projects_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE; -- 추가함!!!!!!!!!!!!!!!!!!!
-ALTER TABLE in_reviews ADD ireview_types VARCHAR2(255); --추가함!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-ALTER TABLE in_projects RENAME COLUMN iproject_description TO iproject_text; --추가함!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-ALTER TABLE IN_PROJECTS MODIFY IPROJECT_USER_ID NULL; --추가함!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+CREATE SEQUENCE in_projects_seq START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
+ALTER TABLE in_reviews ADD ireview_types VARCHAR2(255);
+ALTER TABLE in_projects RENAME COLUMN iproject_description TO iproject_text;
+ALTER TABLE IN_PROJECTS MODIFY IPROJECT_USER_ID NULL; 
+
+ALTER TABLE in_estimate  --추가함!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+RENAME COLUMN iesti_password TO iesti_phone;
+
+ALTER TABLE in_estimate  --추가함!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+MODIFY iesti_phone VARCHAR2(20) NOT NULL;
+
+ALTER TABLE in_reviews RENAME COLUMN ireview_password TO ireview_phone; --추가함!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 select * from in_estimate;
 
