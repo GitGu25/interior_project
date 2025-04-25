@@ -18,11 +18,11 @@ public interface ReviewMapper {
 
 	void insertReview(ReviewDto reviewDto) throws Exception; // 리뷰 추가
 
-	ReviewDto getReviewById(int ireviewId) throws Exception; // 특정 리뷰 조회
+	ReviewDto getReviewById(Long ireviewId) throws Exception; // 특정 리뷰 조회
 
 	void updateReview(ReviewDto reviewDto) throws Exception; // 리뷰 수정
 
-	void deleteReview(int ireviewId) throws Exception; // 리뷰 삭제
+	void deleteReview(Long ireviewId) throws Exception; // 리뷰 삭제
 
 	List<ReviewDto> selectLatestReviews();	//메인에 리뷰가져오기
 }

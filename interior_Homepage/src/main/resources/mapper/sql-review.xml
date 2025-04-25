@@ -33,7 +33,7 @@
         (
         	ireview_id,  <!-- 반드시 추가 -->
             ireview_name,
-            ireview_password,
+            ireview_phone,
             ireview_title,
             ireview_text,
             ireview_types, <!-- 새로 추가된 컬럼 -->
@@ -43,7 +43,7 @@
         (
         	#{ireviewId}, <!-- 반드시 추가 -->
             #{ireviewName},
-            #{ireviewPassword},
+            #{ireviewPhone},
             #{ireviewTitle},
             #{ireviewText},
             #{ireviewTypes}, <!-- 새로 추가된 컬럼 -->
@@ -52,10 +52,11 @@
     </insert>
 
     <!-- 특정 리뷰 조회 -->
-    <select id="getReviewById" parameterType="int" resultType="org.big.dto.ReviewDto">
+    <select id="getReviewById" parameterType="long" resultType="org.big.dto.ReviewDto">
         SELECT
             ireview_id AS ireviewId, 
             ireview_name AS ireviewName, 
+            ireview_phone AS ireviewPhone,
             ireview_title AS ireviewTitle, 
             ireview_text AS ireviewText, 
             ireview_created_at AS ireviewCreatedAt,
@@ -75,7 +76,7 @@
     </update>
 
     <!-- 리뷰 삭제 -->
-    <delete id="deleteReview" parameterType="int">
+    <delete id="deleteReview" parameterType="long">
         DELETE FROM in_reviews
         WHERE ireview_id = #{ireviewId}
     </delete>

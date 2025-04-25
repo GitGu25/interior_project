@@ -23,7 +23,7 @@
 		INSERT INTO in_estimate
 		(
 		iesti_name,
-		iesti_password,
+		iesti_phone,
 		iesti_title,
 		iesti_status,
 		iesti_request_text,
@@ -32,7 +32,7 @@
 		VALUES
 		(
 		#{iestiName},
-		#{iestiPassword},
+		#{iestiPhone},
 		#{iestiTitle},
 		'견적 문의',
 		#{iestiRequestText},
@@ -41,12 +41,14 @@
 	</insert>
 
 	<!-- 게시글 상세 조회 -->
-    <select id="findById" parameterType="int" resultType="org.big.dto.BoardDto">
+	<select id="findById" parameterType="int" resultType="org.big.dto.BoardDto">
 	    SELECT iesti_id AS iestiId, 
 	           iesti_name AS iestiName, 
 	           iesti_title AS iestiTitle, 
 	           iesti_request_text AS iestiRequestText, 
-	           iesti_created_at AS iestiCreatedAt
+	           iesti_created_at AS iestiCreatedAt,
+	           iesti_phone AS iestiPhone,        
+	           iesti_status AS iestiStatus     
 	    FROM in_estimate
 	    WHERE iesti_id = #{iestiId}
 	</select>
@@ -64,7 +66,7 @@
     <delete id="delete" parameterType="int">
         DELETE FROM in_estimate
         WHERE iesti_id = #{iestiId}
+        AND EXISTS (SELECT 1 FROM in_estimate WHERE iesti_id = #{iestiId})
     </delete>
-    
     
 </mapper>

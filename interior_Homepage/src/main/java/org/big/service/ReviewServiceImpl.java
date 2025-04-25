@@ -67,7 +67,7 @@ public class ReviewServiceImpl implements ReviewService {
 	public void reviewBundle(ReviewDto reviewDto) throws Exception {
 	    // 1. 리뷰 저장
 	    reviewMapper.insertReview(reviewDto);
-	    Long ireviewId = reviewDto.getIreviewId();
+	    long ireviewId = reviewDto.getIreviewId();
 	    System.out.println("업로드된 리뷰ID: " + ireviewId);
 
 	    // 2. 업로드된 파일 처리
@@ -93,7 +93,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	// ✅ 유틸 메서드: 파일 저장 + PhotoDto 생성
-	private PhotoDto saveFileAndCreateDto(MultipartFile photo, Long ireviewId) throws Exception {
+	private PhotoDto saveFileAndCreateDto(MultipartFile photo, long ireviewId) throws Exception {
 	    String originalFilename = photo.getOriginalFilename();
 	    String extension = originalFilename.substring(originalFilename.lastIndexOf('.') + 1).toLowerCase();
 
@@ -124,7 +124,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	// 특정 리뷰 조회
 	@Override
-	public ReviewDto getReviewById(int ireviewId) throws Exception {
+	public ReviewDto getReviewById(Long ireviewId) throws Exception {
 		return reviewMapper.getReviewById(ireviewId);
 	}
 
@@ -171,7 +171,7 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	// 리뷰 삭제
 	@Override
-	public void deleteReview(int ireviewId) throws Exception {
+	public void deleteReview(Long ireviewId) throws Exception {
 		reviewMapper.deleteReview(ireviewId);
 	}
 	
@@ -179,6 +179,25 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public List<ReviewDto> getLatestReviews() {
 	    return reviewMapper.selectLatestReviews();
+	}	
+	
+	//전화번호 확인 기능
+	@Override
+	public boolean verifyPhoneNumber(Long ireviewId, String inputPhone) throws Exception {
+	    ReviewDto review = getReviewById(ireviewId);  // 리뷰 아이디로 리뷰를 가져옴
+	    if (review == null || review.getIreviewPhone() == null) {
+	        return false;
+	    }
+
+	    // 숫자만 남겨서 비교 (공백, 하이픈 등 제거)
+	    String savedPhone = review.getIreviewPhone().replaceAll("[^0-9]", "");
+	    String enteredPhone = inputPhone.replaceAll("[^0-9]", "");
+
+	    System.out.println("저장된 전화번호: " + savedPhone);  // 저장된 전화번호 출력
+	    System.out.println("입력된 전화번호: " + enteredPhone);  // 입력된 전화번호 출력
+	    
+	    return savedPhone.equals(enteredPhone);
 	}
 
+	
 }

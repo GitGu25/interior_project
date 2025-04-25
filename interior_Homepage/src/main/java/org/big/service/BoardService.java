@@ -13,4 +13,5 @@ public interface BoardService {
 	void updateBoard(BoardDto boardDto);
 	void deleteBoard(int iestiId);
 	
+	boolean verifyPhoneNumber(int iestiId, String inputPhone); // 전화번호 확인
 }

@@ -60,4 +60,20 @@ public class BoardServiceImpl implements BoardService {
     public void deleteBoard(int iestiId) {
         boardMapper.delete(iestiId);
     }
+    
+    //전화번호 확인 기능
+    @Override
+    public boolean verifyPhoneNumber(int iestiId, String inputPhone) {
+        BoardDto board = getBoardById(iestiId);
+        if (board == null || board.getIestiPhone() == null) {
+            return false;
+        }
+
+        // 숫자만 남겨서 비교 (공백, 하이픈 등 제거)
+        String savedPhone = board.getIestiPhone().replaceAll("[^0-9]", "");
+        String enteredPhone = inputPhone.replaceAll("[^0-9]", "");
+
+        return savedPhone.equals(enteredPhone);
+    }
+
 }

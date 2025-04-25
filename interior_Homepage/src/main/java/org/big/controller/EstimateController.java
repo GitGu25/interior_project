@@ -1,6 +1,8 @@
 package org.big.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.big.dto.BoardDto;
 import org.big.service.BoardService;
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class EstimateController {
@@ -86,6 +90,20 @@ public class EstimateController {
     public String deleteBoard(@RequestParam("iestiId") int iestiId) {
         boardService.deleteBoard(iestiId);
         return "redirect:/estimate";  // 삭제 후 목록으로 이동
+    }
+
+    //견적문의 전화번호 확인
+    @PostMapping("/estimate/verify")
+    @ResponseBody
+    public Map<String, Object> verifyPhoneNumber(@RequestBody Map<String, Object> requestData) {
+        int iestiId = Integer.parseInt(requestData.get("iestiId").toString());
+        String inputPhone = requestData.get("phone").toString();
+
+        boolean match = boardService.verifyPhoneNumber(iestiId, inputPhone);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", match);
+        return response;
     }
 
 }

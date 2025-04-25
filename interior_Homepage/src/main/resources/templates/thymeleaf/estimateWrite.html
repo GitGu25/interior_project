@@ -30,10 +30,13 @@
                 <th class="estimate-label">내용</th>
                 <td colspan="3"><textarea name="iestiRequestText" class="textarea-content"></textarea></td>
             </tr>
-            <tr>
-                <th class="estimate-label">비밀번호</th>
-                <td colspan="3"><input type="password" name="iestiPassword" class="input-password" required></td>
-            </tr>
+			<tr>
+			    <th class="estimate-label">전화번호</th>
+			    <td colspan="3">
+			        <input type="tel" name="iestiPhone" class="input-phone" pattern="[0-9]{10,11}" required placeholder="01012345678">
+			    </td>
+			</tr>
+
         </table>
 		<div class="btn-area">
 		    	<button type="submit" class="btn btn-submit">작성하기</button>

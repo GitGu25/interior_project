@@ -2,7 +2,9 @@ package org.big.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.big.dto.PhotoDto;
 import org.big.dto.ReviewDto;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
@@ -75,7 +79,7 @@ public class ReviewController {
 
 	// 📌 특정 리뷰 조회
 	@GetMapping("/review/view/{ireviewId}")
-	public String getReviewDetail(@PathVariable int ireviewId, Model model) throws Exception {
+	public String getReviewDetail(@PathVariable Long ireviewId, Model model) throws Exception{
 		ReviewDto review = reviewService.getReviewById(ireviewId); // 리뷰 데이터 조회
 
 		if (review == null) {
@@ -92,7 +96,7 @@ public class ReviewController {
 
 	// 수정 페이지 열기
 	@GetMapping("/review/update/{ireviewId}")
-	public String openReviewUpdate(@PathVariable int ireviewId, Model model) throws Exception {
+	public String openReviewUpdate(@PathVariable Long ireviewId, Model model) throws Exception{
 		ReviewDto review = reviewService.getReviewById(ireviewId);
 
 		if (review == null) {
@@ -117,7 +121,7 @@ public class ReviewController {
 
 	// 📌 리뷰 수정 처리
 	@PostMapping("/review/update/{ireviewId}")
-	public String updateReview(@PathVariable int ireviewId, 
+	public String updateReview(@PathVariable Long ireviewId, 
 	                           @ModelAttribute ReviewDto reviewDto,
 	                           @RequestParam(required = false) List<String> ireviewTypes,
 	                           @RequestParam(required = false) List<MultipartFile> uploadFiles,
@@ -129,7 +133,7 @@ public class ReviewController {
 	    }
 
 	    reviewDto.setUploadFiles(uploadFiles);
-	    reviewDto.setIreviewId((long) ireviewId);
+	    reviewDto.setIreviewId(ireviewId);
 
 	    // 👇 삭제할 사진 ID를 서비스로 전달하여 삭제 처리
 	    reviewService.updateRBundle(reviewDto, deletePhotoIds);
@@ -137,13 +141,27 @@ public class ReviewController {
 	    return "redirect:/review/list"; // 리뷰 수정 후 목록 페이지로 리다이렉트
 	}
 
-
-
 	// 📌 리뷰 삭제 처리
 	@PostMapping("/review/delete")
-	public String deleteReview(@RequestParam("ireviewId") int ireviewId) throws Exception {
+	public String deleteReview(@RequestParam("ireviewId") Long ireviewId) throws Exception {
 		reviewService.deleteReview(ireviewId); // 리뷰 삭제
 
 		return "redirect:/review/list"; // 삭제 후 목록 페이지로 이동
 	}
+	
+	// 리뷰 전화번호 확인
+	@PostMapping("/review/verify")
+	@ResponseBody
+	public Map<String, Object> verifyPhoneNumber(@RequestBody Map<String, Object> requestData) throws Exception {
+		Long reviewId = Long.parseLong(requestData.get("ireviewId").toString());
+	    String inputPhone = requestData.get("phone").toString();
+
+	    boolean match = reviewService.verifyPhoneNumber(reviewId, inputPhone);
+
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("success", match);
+	    return response;
+	}
+
+
 }

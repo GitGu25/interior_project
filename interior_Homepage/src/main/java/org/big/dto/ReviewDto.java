@@ -10,9 +10,9 @@ import lombok.Data;
 @Data
 public class ReviewDto {
 
-	private Long ireviewId; // 리뷰 번호
+	private long ireviewId; // 리뷰 번호
 	private String ireviewName; // 작성자 이름
-	private String ireviewPassword; // 게시글 비밀번호
+	private String ireviewPhone; // 게시글 전화번호(확인용)
 	private String ireviewTitle; // 제목
 	private String ireviewText; // 후기 내용
 	private LocalDateTime ireviewCreatedAt; // 작성일

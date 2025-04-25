@@ -16,7 +16,4 @@ public interface BoardMapper {
     BoardDto findById(int iestiId);   // 게시글 상세 조회
     void update(BoardDto board); // 게시글 수정
     void delete(int iestiId);         // 게시글 삭제
-
-	
-
-    }
+}
