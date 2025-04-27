@@ -12,13 +12,15 @@
     <div class="container">
         <h2 class="board-title">시공 사례</h2>
         <div class="btn-right">
-            <a href="/project/write" class="btn">작성하기</a>
+            <a href="/project/write" class="btn">사례 작성하기</a>
         </div>
+		
+		<div th:if="${#lists.isEmpty(projects)}">
+			<p style="text-align:center">등록된 시공 사례가 없습니다.</p>
+		</div>
+		
         <!-- 시공 사례 리스트 -->
 		<div class="project-grid">
-		    <div th:if="${#lists.isEmpty(projects)}">
-		        <p>등록된 시공 사례가 없습니다.</p>
-		    </div>
 			<div class="project-card" th:each="project : ${projects}">
 			    <a th:href="@{/project/view/{id}(id=${project.iprojectId})}">
 			        <div class="project-thumb" th:if="${project.thumbUrl != null}">

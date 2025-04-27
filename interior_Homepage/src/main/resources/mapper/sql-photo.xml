@@ -29,11 +29,11 @@
     <select id="getPhotosByPId" resultType="org.big.dto.PhotoDto">
         SELECT
             iphoto_id,
+            iphoto_project_id,
+            iphoto_review_id,
             iphoto_filename,
             iphoto_extension,
-            iphoto_uploaded_at,
-            iphoto_project_id,
-            iphoto_review_id
+            iphoto_uploaded_at
         FROM in_photos
         WHERE iphoto_project_id = #{iphotoProjectId}
     </select>

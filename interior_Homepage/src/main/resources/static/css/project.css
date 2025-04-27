@@ -10,10 +10,11 @@
 }
 
 .board-title {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 30px;
-    text-align: center;
+	font-size: 40px; 
+	font-weight: bold;
+	text-align: center;
+	margin-top: 80px;
+	margin-bottom: 8px;
 }
 
 .btn-right {
@@ -23,15 +24,16 @@
 
 .btn {
   margin: 8px;
-  padding: 8px 16px;
+  padding: 10px 20px;
   color: #fff;
   background-color: #363636;
   display: inline-block;
   font-weight: bold;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
   vertical-align: middle;
+  text-decoration: none;
 }
 
 /* 3열 그리드 레이아웃 */

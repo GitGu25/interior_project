@@ -43,7 +43,7 @@ td {
 }
 
 /* ----------- 입력 필드 스타일 ----------- */
-input[type="text"], input[type="password"], select, textarea {
+input[type="text"], input[type="tel"], select, textarea {
     width: 100%;
     padding: 8px;
     border: 1px solid #eee;

@@ -36,7 +36,6 @@ body {
 .btn-right {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 20px;
 }
 
 a.review-title {
@@ -243,37 +242,11 @@ a.review-title {
 
 /* 리뷰 수정 페이지 스타일 */
 .board-title {
-  font-size: 36px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 5px;
-  display: inline-block;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 12px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: #3a9ad9;
-  outline: none;
+	font-size: 40px !important; 
+	font-weight: bold;
+	text-align: center;
+	margin-top: 80px;
+	margin-bottom: 8px !important;
 }
 
 .review-types {
@@ -284,21 +257,6 @@ a.review-title {
 .review-types label {
   font-weight: normal;
   margin-right: 15px;
-}
-
-.form-group button {
-  padding: 12px 30px;
-  background-color: #363636;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.form-group button:hover {
-  background-color: #555;
 }
 
 .btn-group a {

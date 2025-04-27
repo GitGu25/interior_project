@@ -107,10 +107,10 @@ public class ProjectController {
 	// 시공 사례 수정 처리
 	@PostMapping("/project/update/{iprojectId}")
 	public String updateProject(@PathVariable int iprojectId, 
-			@ModelAttribute ProjectDto projectDto,
-			@RequestParam(required = false) List<MultipartFile> uploadFiles,
-			@RequestParam(required = false, name = "deletePhotoIds") List<Long> deletePhotoIds,
-			Model model) throws Exception {
+								@ModelAttribute ProjectDto projectDto,
+								@RequestParam(required = false) List<MultipartFile> uploadFiles,
+								@RequestParam(required = false, name = "deletePhotoIds") List<Long> deletePhotoIds,
+								Model model) throws Exception {
 
 		projectDto.setUploadFiles(uploadFiles);
 		projectDto.setIprojectId((long) iprojectId);

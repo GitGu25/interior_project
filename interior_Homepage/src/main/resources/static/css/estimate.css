@@ -8,7 +8,7 @@ html, body, div, h1, h2, a, form, table, caption, thead, tbody, tr, th, td, subm
 	margin:0; outline:0; border:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent;
 }
 body { 
-	font-size:0.875em; line-height:1.5; color:#666; -webkit-text-size-adjust:none; min-width:320px;
+	font-size:16px; -webkit-text-size-adjust:none; min-width:320px;
 	font-family:'NanumGothic','나눔고딕',dotum, "Helvetica Neue", Helvetica, Verdana, Arial, Sans-Serief;
 }
 h1, h2, h3 {font-size: 1.5em;}
@@ -19,11 +19,19 @@ input{vertical-align:middle;}
 input:focus {outline:0;}
 caption {display:none; width:0; height:0; margin-top:-1px; overflow:hidden; visibility:hidden; font-size:0; line-height:0;}
 
-.container {max-width:1024px; margin:30px auto;}
+.container {
+  width: 100%;
+  max-width: 1140px;
+  padding: 20px 15px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
 .board_list {width:100%; border-top:2px solid #252525; border-bottom:1px solid #ccc; margin:15px 0; border-collapse: collapse;}
 .board_list thead th:first-child {background-image:none;}
 .board_list thead th {border-bottom:1px solid #ccc; padding:13px 0; color:#3b3a3a; text-align: center; vertical-align:middle;}
-.board_list tbody td {border-top:1px solid #ccc; padding:13px 0; text-align:center; vertical-align:middle;}
+.board_list tbody td {border-top:1px solid #ccc; padding:16px 0; text-align:center; vertical-align:middle;}
 .board_list tbody tr:first-child td {border:none;}
 .board_list tbody tr:hover{background:rgb(250, 250, 250);} 
 .board_list tbody td.title {text-align:left; padding-left:20px;}
@@ -38,8 +46,30 @@ caption {display:none; width:0; height:0; margin-top:-1px; overflow:hidden; visi
 .file_list a {display:inherit !important;}
 
 .board-title {
+	color: black;
 	font-size: 40px;
 	font-weight: bold;
 	text-align: center;
 	margin-top: 80px;
+	margin-bottom: 8px;
 }
+
+
+.btn {
+   margin: 8px; 
+   padding: 10px 20px;
+   color: #fff !important;
+   display: inline-block; 
+   background-color: #363636;
+   vertical-align: middle; 
+   border-radius: 5px; !important;
+   cursor: pointer;
+   border: none;
+   float: right; /* 버튼을 오른쪽으로 배치 */
+   display: inline-block;
+   font-weight: bold;
+   text-decoration: none;
+   font-size: 16px;
+}
+
+.btn:hover {background: #555;}

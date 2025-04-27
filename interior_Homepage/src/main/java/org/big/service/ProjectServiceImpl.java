@@ -122,13 +122,13 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 
-	// 특정 리뷰 조회
+	// 특정 프로젝트 조회
 	@Override
 	public ProjectDto getProjectById(int iprojectId) throws Exception {
 		return projectMapper.getProjectById(iprojectId);
 	}
 
-	// 리뷰 수정
+	// 프로젝트 수정
 	@Override
 	public void updateProject(ProjectDto projectDto) throws Exception {
 		projectMapper.updateProject(projectDto);
@@ -138,8 +138,7 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	@Transactional
 	public void updatePBundle(ProjectDto projectDto, List<Long> deletePhotoIds) throws Exception {
-
-		// 1. 리뷰 본문 수정
+		// 1. 프로젝트 본문 수정
 		projectMapper.updateProject(projectDto);
 	    Long iprojectId = projectDto.getIprojectId(); // 수정할 리뷰 ID
 

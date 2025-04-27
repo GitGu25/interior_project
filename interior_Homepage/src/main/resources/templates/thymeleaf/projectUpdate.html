@@ -83,6 +83,8 @@
         Array.from(files).forEach(file => {
             selectedFiles.push(file);
 
+			console.log("현재 선택된 파일들: ", selectedFiles); // 파일이 배열에 잘 추가되었는지 콘솔에서 확인
+			
             const reader = new FileReader();
             reader.onload = function(e) {
                 const wrapper = document.createElement('div');
@@ -113,6 +115,8 @@
                 wrapper.appendChild(img);
                 wrapper.appendChild(delBtn);
                 container.appendChild(wrapper);
+				
+				console.log("미리보기 이미지 추가됨: ", wrapper);
             };
             reader.readAsDataURL(file);
         });
