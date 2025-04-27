@@ -96,13 +96,13 @@ public class EstimateController {
     @PostMapping("/estimate/verify")
     @ResponseBody
     public Map<String, Object> verifyPhoneNumber(@RequestBody Map<String, Object> requestData) {
-        int iestiId = Integer.parseInt(requestData.get("iestiId").toString());
-        String inputPhone = requestData.get("phone").toString();
+        int iestiId = Integer.parseInt(requestData.get("iestiId").toString()); // 게시글 ID 추출
+        String inputPhone = requestData.get("phone").toString(); // 입력된 전화번호 추출
 
         boolean match = boardService.verifyPhoneNumber(iestiId, inputPhone);
 
         Map<String, Object> response = new HashMap<>();
-        response.put("success", match);
+        response.put("success", match); // 결과 반환 (성공/실패)
         return response;
     }
 

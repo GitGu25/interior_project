@@ -30,7 +30,6 @@
         INSERT INTO in_projects
         (
             iproject_id,
-            <!--iproject_user_id,-->
             iproject_name,
             iproject_title,
             iproject_text,
@@ -39,7 +38,6 @@
         VALUES
         (
             #{iprojectId},
-            <!--#{iprojectUserId},-->
             #{iprojectName},
             #{iprojectTitle},
             #{iprojectText},

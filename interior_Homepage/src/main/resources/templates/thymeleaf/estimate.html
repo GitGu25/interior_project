@@ -88,26 +88,22 @@ function openPhoneModal(id) {
     document.getElementById("modalEstimateId").value = id;
     document.getElementById("phoneInput").value = "";
     document.getElementById("errorMsg").innerText = "";
-    document.getElementById("phoneModal").style.display = "block";
+    document.getElementById("phoneModal").style.display = "block"; 	//모달 열기
 }
-
 function closeModal() {
-    document.getElementById("phoneModal").style.display = "none";
+    document.getElementById("phoneModal").style.display = "none"; 	//모달 닫기
 }
-
-function checkPhone() {
-    const phone = document.getElementById("phoneInput").value.trim();
-    const id = document.getElementById("modalEstimateId").value;
-
+function checkPhone() { // 전화번호 체크 후 결과 처리
+    const phone = document.getElementById("phoneInput").value.trim(); //입력된 전화번호 가져오기
+    const id = document.getElementById("modalEstimateId").value; //게시글 ID 가져오기
     if (!phone) {
         document.getElementById("errorMsg").innerText = "전화번호를 입력해주세요.";
         return;
     }
-
     fetch("/estimate/verify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ iestiId: id, phone: phone })
+        body: JSON.stringify({ iestiId: id, phone: phone })  //요청 데이터 (게시글 ID, 전화번호)
     })
     .then(res => res.json())
     .then(data => {

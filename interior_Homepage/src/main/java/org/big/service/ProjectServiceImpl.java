@@ -32,25 +32,25 @@ public class ProjectServiceImpl implements ProjectService {
 		this.photoMapper = photoMapper;
 	}
 
-	// 리뷰 목록 조회 (페이지네이션 적용)
+	// 프로젝트 목록 조회 (페이지네이션 적용)
 	@Override
 	public List<ProjectDto> getProjects(int page, int size) throws Exception {
 	    int offset = (page - 1) * size; // 페이지 오프셋 계산
 	    List<ProjectDto> projects = projectMapper.getProjects(offset, size);
 
-	    // 각 리뷰에 연결된 첫 번째 사진의 경로를 thumbUrl에 설정
+	    // 각 프로젝트에 연결된 첫 번째 사진의 경로를 thumbUrl에 설정
 	    for (ProjectDto project : projects) {
 	    	List<PhotoDto> photos = photoMapper.getPhotosByPId(project.getIprojectId());
 	        if (!photos.isEmpty()) {
 	            String thumbUrl = "/uploads/" + photos.get(0).getIphotoFilename(); // 첫 번째 사진의 경로
-	            project.setThumbUrl(thumbUrl); // 리뷰에 thumbUrl 설정
+	            project.setThumbUrl(thumbUrl); // 프로젝트에 thumbUrl 설정
 	        }
 	    }
 	    return projects;
 	}
 
 
-	// 전체 리뷰 개수 조회 (페이지네이션용)
+	// 전체 프로젝트 개수 조회 (페이지네이션용)
 	public int getTotalProjectCount() throws Exception {
 		return projectMapper.getTotalProjectCount();
 	}
@@ -61,14 +61,14 @@ public class ProjectServiceImpl implements ProjectService {
 		return (int) Math.ceil((double) totalProjects / size);
 	}
 
-	// 리뷰 저장 + 사진 업로드 및 저장
+	// 프로젝트 저장 + 사진 업로드 및 저장
 	@Override
 	@Transactional 
 	public void projectBundle(ProjectDto projectDto) throws Exception {
-	    // 1. 리뷰 저장
+	    // 1. 프로젝트 저장
 		projectMapper.insertProject(projectDto);
 	    Long iprojectId = projectDto.getIprojectId();
-	    System.out.println("업로드된 리뷰ID: " + iprojectId);
+	    System.out.println("업로드된 프로젝트ID: " + iprojectId);
 
 	    // 2. 업로드된 파일 처리
 	    List<MultipartFile> photos = projectDto.getUploadFiles();
@@ -140,7 +140,7 @@ public class ProjectServiceImpl implements ProjectService {
 	public void updatePBundle(ProjectDto projectDto, List<Long> deletePhotoIds) throws Exception {
 		// 1. 프로젝트 본문 수정
 		projectMapper.updateProject(projectDto);
-	    Long iprojectId = projectDto.getIprojectId(); // 수정할 리뷰 ID
+	    Long iprojectId = projectDto.getIprojectId(); // 수정할 프로젝트 ID
 
 	    // 2. 삭제할 이미지가 있다면 삭제
 	    if (deletePhotoIds != null && !deletePhotoIds.isEmpty()) {
@@ -169,13 +169,13 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	
-	// 리뷰 삭제
+	// 프로젝트 삭제
 	@Override
 	public void deleteProject(int iprojectId) throws Exception {
 		projectMapper.deleteProject(iprojectId);
 	}
 	
-	//메인에 리뷰가져오기
+	//메인에 프로젝트가져오기
 	@Override
 	public List<ProjectDto> getLatestProjects() {
 	    return projectMapper.selectLatestProjects();

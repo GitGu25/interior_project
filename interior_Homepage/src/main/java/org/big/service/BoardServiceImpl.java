@@ -64,7 +64,7 @@ public class BoardServiceImpl implements BoardService {
     //전화번호 확인 기능
     @Override
     public boolean verifyPhoneNumber(int iestiId, String inputPhone) {
-        BoardDto board = getBoardById(iestiId);
+        BoardDto board = getBoardById(iestiId); // 게시글 정보 조회
         if (board == null || board.getIestiPhone() == null) {
             return false;
         }
@@ -73,7 +73,7 @@ public class BoardServiceImpl implements BoardService {
         String savedPhone = board.getIestiPhone().replaceAll("[^0-9]", "");
         String enteredPhone = inputPhone.replaceAll("[^0-9]", "");
 
-        return savedPhone.equals(enteredPhone);
+        return savedPhone.equals(enteredPhone); // 전화번호 일치 여부 반환
     }
 
 }
